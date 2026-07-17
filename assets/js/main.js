@@ -3,8 +3,9 @@ const menuBtn = document.getElementById('menuBtn');
 const navList = document.getElementById('navList');
 
 menuBtn.addEventListener('click', () => {
-  menuBtn.classList.toggle('open');
+  const isOpen = menuBtn.classList.toggle('open');
   navList.classList.toggle('show');
+  menuBtn.setAttribute('aria-expanded', isOpen);
 });
 
 // Close menu when a nav link is clicked
@@ -12,6 +13,17 @@ navList.addEventListener('click', (e) => {
   if (e.target.tagName === 'A') {
     menuBtn.classList.remove('open');
     navList.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Close menu with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navList.classList.contains('show')) {
+    menuBtn.classList.remove('open');
+    navList.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.focus();
   }
 });
 
