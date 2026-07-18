@@ -966,7 +966,7 @@ p {
 .footer {
   background: var(--surface);
   border-top: 1px solid var(--border);
-  padding: 3rem 0;
+  padding: 3rem 0 4.5rem; /* Includes safe space for floating elements */
   color: var(--muted);
   font-size: 0.9rem;
 }
@@ -1005,6 +1005,23 @@ p {
 .footer-links-col a:hover {
   color: var(--accent);
 }
+
+.footer-copy {
+  margin-top: 2rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.social-label {
+  font-size: 0.85rem;
+  margin-top: 1.5rem;
+  color: #9ca3af;
+}
+
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.text-ink { color: var(--ink) !important; }
 
 /* Floating WA button */
 .floating-wa {
@@ -1182,14 +1199,10 @@ p {
     height: 100%;
     min-height: 460px;
   }
-
-  .footer {
-    padding-bottom: 4rem; /* Safe space for floating elements */
-  }
 }
 
-/* Mobile Menu Specific (max-width: 768px) */
-@media (max-width: 768px) {
+/* Mobile Menu Specific (max-width: 767px) */
+@media (max-width: 767px) {
   .menu-btn {
     display: block;
   }
@@ -1238,14 +1251,9 @@ p {
     width: 28px;
   }
 
-  .menu-btn {
-    width: 36px;
-    height: 36px;
-  }
-
   .menu-btn span {
     width: 20px;
-    left: 8px;
+    left: 12px;
   }
 
   .menu-btn span:nth-child(1) { top: 13px; }
