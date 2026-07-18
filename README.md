@@ -2,13 +2,24 @@
 
 Website profil statis New Sobat Komputer di Kejobong, Purbalingga.
 
-## File Utama
+## Dokumentasi Source Code
 
-- `index.html`: konten, metadata, navigasi, dan tautan integrasi.
-- `assets/css/style.css`: seluruh gaya responsif native CSS.
-- `index.md`: file lama repository; bukan entry point GitHub Pages.
+Proyek ini dibangun sebagai situs statis satu halaman tanpa _build tool_ (zero-build static site).
 
-Semua path aset memakai path relatif agar kompatibel dengan GitHub Project Pages.
+### Struktur File Utama
+
+- `index.html`: Merupakan titik masuk (_entry point_) dari website. File ini mengatur struktur DOM, tag semantik, metadata SEO (termasuk Schema JSON-LD), serta menghubungkan skrip CSS dan JS.
+- `assets/css/style.css`: File CSS utama. Menggunakan variabel CSS (_Custom Properties_) di `:root` untuk mendefinisikan _warm design tokens_ (seperti warna netral hangat dan hijau WhatsApp). Tata letak dibangun dengan Flexbox dan CSS Grid sehingga sepenuhnya responsif tanpa framework seperti Bootstrap/Tailwind.
+- `assets/js/main.js`: Menangani interaksi UI secara progresif, meliputi tombol navigasi mobile (hamburger menu), status tautan aktif (_active link state_) saat di-scroll, tombol _Back to Top_, dan _focus management_ (tombol _Escape_ pada menu).
+- `AGENTS.md`: Berisi konvensi (_invariants_) serta panduan khusus bagi agen AI, menetapkan batas-batas arsitektur dan persyaratan rilis.
+
+Semua path aset memakai path relatif agar kompatibel dengan sub-path direktori GitHub Project Pages.
+
+### Arsitektur Antarmuka & Layanan
+
+- **Aksesibilitas Utama**: Website berfungsi optimal tanpa JavaScript. Tersedia tautan _skip-to-main-content_ bagi pengguna papan tik (keyboard).
+- **Layanan & Timeline SOP**: Menggunakan struktur grid (layanan PC, CCTV, dll) dan layout timeline kustom untuk menyampaikan SOP Service dan SOP Jual-Beli dengan transparan.
+- **Integrasi Eksternal**: Tombol _Chat WhatsApp_ membawa muatan pesan yang telah di-URL-encode untuk mempermudah pendaftaran servis. Peta (_map_) dirender melalui `iframe` dengan `loading="lazy"` agar performa halaman utama tetap ringan.
 
 ## Pembaruan Konten
 

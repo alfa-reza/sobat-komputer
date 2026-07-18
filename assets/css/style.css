@@ -1,20 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
 /* === Reset & Base === */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #fafafa;
+  --bg: #fffbf7;
   --surface: #ffffff;
-  --ink: #1a1a2e;
-  --muted: #6b7280;
-  --accent: #16a34a;
-  --accent-hover: #15803d;
-  --accent-light: #dcfce7;
-  --border: #e5e7eb;
-  --radius: 10px;
+  --ink: #292524;
+  --muted: #78716c;
+  --accent: #d97706;
+  --accent-hover: #b45309;
+  --accent-light: #fef3c7;
+  --wa-green: #25D366;
+  --wa-green-hover: #128C7E;
+  --border: #e7e5e4;
+  --radius: 12px;
   --max-w: 1100px;
-  --font: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
@@ -26,6 +27,9 @@ ul { list-style: none; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 .wrap { width: min(100% - 2rem, var(--max-w)); margin-inline: auto; }
+
+.skip-link { position: absolute; top: -60px; left: 0; background: var(--accent); color: #fff; padding: 12px 24px; z-index: 200; transition: top 0.2s; font-weight: 600; }
+.skip-link:focus { top: 0; }
 
 /* === Header === */
 .header {
@@ -96,8 +100,10 @@ ul { list-style: none; }
   padding: 12px 24px; border-radius: 8px; font-weight: 600; font-size: 0.95rem;
   transition: all 0.2s;
 }
-.btn-primary { background: var(--accent); color: #fff; }
-.btn-primary:hover { background: var(--accent-hover); color: #fff; transform: translateY(-1px); }
+.btn-primary { background: var(--accent); color: #fff; border: 1.5px solid var(--accent); }
+.btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; transform: translateY(-1px); }
+.btn-wa { background: var(--wa-green); color: #fff; border: 1.5px solid var(--wa-green); }
+.btn-wa:hover { background: var(--wa-green-hover); border-color: var(--wa-green-hover); color: #fff; transform: translateY(-1px); }
 .btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.3); color: #fff; }
 .btn-outline:hover { border-color: #fff; color: #fff; }
 
@@ -150,6 +156,14 @@ ul { list-style: none; }
 .info-card h3 { font-size: 1rem; margin-bottom: 0.5rem; }
 .info-card p, .info-card address { color: var(--muted); font-size: 0.9rem; font-style: normal; margin: 0; }
 
+/* === Timeline === */
+.timeline { display: flex; flex-direction: column; gap: 1.5rem; max-width: 600px; margin: 0 auto; position: relative; padding-left: 24px; text-align: left; }
+.timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 0; width: 2px; background: var(--border); }
+.timeline-item { position: relative; background: var(--surface); padding: 1.25rem 1.5rem; border-radius: var(--radius); border: 1px solid var(--border); }
+.timeline-item::before { content: ''; position: absolute; left: -29px; top: 20px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--border); }
+.timeline-item h4 { font-size: 1.05rem; margin-bottom: 0.25rem; color: var(--ink); font-weight: 600; }
+.timeline-item p { font-size: 0.95rem; color: var(--muted); margin: 0; line-height: 1.6; }
+
 /* === Map === */
 .map-box {
   width: 100%;
@@ -181,9 +195,21 @@ ul { list-style: none; }
   padding: 2rem 0; text-align: center; color: var(--muted); font-size: 0.85rem;
 }
 
+/* === Floating WA === */
+.floating-wa {
+  position: fixed; bottom: 24px; right: 24px; z-index: 90;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--wa-green); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 12px rgba(37,211,102,0.4);
+  transition: all 0.3s;
+}
+.floating-wa:hover { transform: scale(1.05); background: var(--wa-green-hover); color: #fff; }
+.floating-wa svg { width: 28px; height: 28px; }
+
 /* === Back to Top === */
 .back-top {
-  position: fixed; bottom: 24px; right: 24px; z-index: 90;
+  position: fixed; bottom: 96px; right: 24px; z-index: 90;
   width: 44px; height: 44px; border-radius: 50%;
   background: var(--accent); color: #fff; border: none; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
