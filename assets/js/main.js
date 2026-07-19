@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js-ready');
+
 // Mobile menu toggle
 const menuBtn = document.getElementById('menuBtn');
 const navList = document.getElementById('navList');

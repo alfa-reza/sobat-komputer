@@ -55,6 +55,7 @@
       <ul class="nav-list" id="navList">
         <li><a href="index.html" aria-current="page" class="active">Beranda</a></li>
         <li><a href="layanan.html">Layanan</a></li>
+        <li><a href="produk.html">Produk</a></li>
         <li><a href="promo.html">Promo</a></li>
         <li><a href="kontak.html">Kontak</a></li>
       </ul>
@@ -146,6 +147,22 @@
       </div>
     </section>
 
+    <!-- Produk Teaser -->
+    <section id="produk" class="section" aria-labelledby="home-products-title">
+      <div class="wrap">
+        <h2 class="section-title" id="home-products-title">Produk Pilihan</h2>
+        <p class="section-sub">Lihat beberapa produk yang tersedia dan tanyakan ketersediaannya melalui WhatsApp.</p>
+        <div class="product-region" data-product-teaser>
+          <div class="product-empty" role="status">
+            <p>Lihat katalog produk terbaru kami.</p>
+          </div>
+        </div>
+        <p class="product-teaser-action">
+          <a class="btn btn-primary" href="produk.html">Lihat Semua Produk</a>
+        </p>
+      </div>
+    </section>
+
     <!-- Promo Teaser -->
     <section id="promo" class="section">
       <div class="wrap teaser-promo-wrap">
@@ -229,6 +246,7 @@
           <ul class="mt-2">
             <li><a href="index.html">Beranda</a></li>
             <li><a href="layanan.html">Layanan</a></li>
+            <li><a href="produk.html">Produk</a></li>
             <li><a href="promo.html">Promo</a></li>
             <li><a href="kontak.html">Kontak</a></li>
           </ul>
@@ -250,8 +268,10 @@
 
   <script type="module">
     import { initHero } from './assets/js/public/hero.mjs';
+    import { initProducts } from './assets/js/public/products.mjs';
 
     initHero(document.querySelector('[data-hero-picture]'));
+    initProducts(document.querySelector('[data-product-teaser]'), { limit: 3, pageUrl: window.location.href });
   </script>
   </body>
 </html>
