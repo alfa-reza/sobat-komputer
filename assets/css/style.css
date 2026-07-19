@@ -693,6 +693,19 @@ p {
   font-family: monospace;
 }
 
+.promo-empty {
+  min-height: 24rem;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
 .promo-details-box {
   background: var(--surface);
   border: 1px solid var(--border);
