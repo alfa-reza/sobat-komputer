@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Produk | New Sobat Komputer</title>
+  <meta name="description" content="Lihat pilihan produk New Sobat Komputer dan tanyakan ketersediaannya langsung melalui WhatsApp.">
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script defer src="assets/js/main.js"></script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header class="header">
+    <div class="wrap">
+      <a href="index.html" class="header-brand" aria-label="Kembali ke beranda">
+        <img src="assets/images/logo.png" alt="Logo New Sobat Komputer" width="32" height="32">
+        New Sobat Komputer
+      </a>
+      <button type="button" class="menu-btn" id="menuBtn" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="navList">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-list" id="navList">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="layanan.html">Layanan</a></li>
+        <li><a href="promo.html">Promo</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+      </ul>
+      <a href="https://wa.me/6285742744594?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20mendapatkan%20informasi%20dari%20website." class="btn btn-wa btn-header-wa" target="_blank" rel="noopener noreferrer">Chat WA</a>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Beranda</a> &middot; <span>Produk</span>
+      </nav>
+      <h1>Produk</h1>
+      <p>Lihat pilihan unit yang tersedia dan tanyakan ketersediaannya langsung melalui WhatsApp.</p>
+    </div>
+  </section>
+
+  <main id="main-content">
+    <section class="section" aria-labelledby="product-catalog-title">
+      <div class="wrap">
+        <h2 class="section-title" id="product-catalog-title">Katalog Produk</h2>
+        <p class="section-sub">Pilih produk lalu hubungi kami untuk menanyakan ketersediaannya.</p>
+        <div class="product-region" data-products>
+          <div class="product-empty" role="status">
+            <p>Belum ada produk yang ditampilkan saat ini.</p>
+            <a class="btn btn-wa" href="https://wa.me/6285742744594?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia." target="_blank" rel="noopener noreferrer">Tanya Produk via WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="cta-box">
+          <h2>Belum Menemukan Produk yang Dicari?</h2>
+          <p>Hubungi kami melalui WhatsApp untuk menanyakan unit yang tersedia.</p>
+          <a class="btn btn-wa" href="https://wa.me/6285742744594?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia." target="_blank" rel="noopener noreferrer">Chat WhatsApp</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <p><strong>New Sobat Komputer</strong></p>
+          <p class="mt-1">Jalan Raya Kejobong, sebelah barat Puskesmas Kejobong, Purbalingga</p>
+          <p class="mt-1">Senin &ndash; Sabtu | 08.00 &ndash; 16.00 WIB</p>
+        </div>
+        <div class="footer-links-col">
+          <p><strong>Menu</strong></p>
+          <ul class="mt-2">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="layanan.html">Layanan</a></li>
+            <li><a href="promo.html">Promo</a></li>
+            <li><a href="kontak.html">Kontak</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-copy">&copy; 2026 New Sobat Komputer</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/6285742744594?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20mendapatkan%20informasi%20dari%20website." class="floating-wa" aria-label="Chat WhatsApp">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  </a>
+
+  <button type="button" class="back-top" id="backTop" aria-label="Kembali ke atas">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script type="module">
+    import { initProducts } from './assets/js/public/products.mjs';
+
+    initProducts(document.querySelector('[data-products]'), { pageUrl: window.location.href });
+  </script>
+</body>
+</html>
