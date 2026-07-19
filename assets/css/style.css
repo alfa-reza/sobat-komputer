@@ -572,13 +572,14 @@ p {
 
 .carousel-track {
   display: flex;
-  width: 400%;
+  width: 100%;
   height: 100%;
   transition: transform 0.5s ease-in-out;
 }
 
 .carousel-slide {
-  width: 25%;
+  flex: 0 0 100%;
+  width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -603,14 +604,18 @@ p {
   color: #fff;
   border: none;
   cursor: pointer;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   transition: background 0.2s, opacity 0.2s;
   opacity: 0;
 }
 
-.promo-carousel:hover .carousel-viewport .carousel-btn {
+.promo-carousel.is-interactive .carousel-viewport .carousel-btn {
+  display: flex;
+}
+
+.promo-carousel.is-interactive:hover .carousel-viewport .carousel-btn {
   opacity: 1;
 }
 
@@ -623,12 +628,16 @@ p {
 }
 
 .carousel-footer {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 1.25rem;
   background: #12100e;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.promo-carousel.is-interactive .carousel-footer {
+  display: flex;
 }
 
 .carousel-icon-btn {
@@ -644,6 +653,18 @@ p {
 }
 
 .carousel-icon-btn:hover { color: var(--accent); }
+
+.play-pause .icon-play {
+  display: none;
+}
+
+.play-pause.is-paused .icon-play {
+  display: block;
+}
+
+.play-pause.is-paused .icon-pause {
+  display: none;
+}
 
 .carousel-indicators {
   display: flex;
