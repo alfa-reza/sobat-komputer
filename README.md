@@ -22,11 +22,20 @@ Website ini sekarang telah dikembangkan dari satu halaman panjang menjadi situs 
 ├── promo.html
 ├── kontak.html
 ├── assets/
-│   ├── css/style.css   # Stylesheet global bersama
-│   ├── js/main.js     # Script interaksi global bersama
-│   └── images/        # Folder aset gambar & logo
-└── screenshots/       # Bukti tangkapan layar pengujian visual
+│   ├── css/style.css       # Stylesheet global bersama
+│   ├── js/
+│   │   ├── main.js         # Script interaksi global existing
+│   │   ├── core/           # Helper dan akses backend bersama
+│   │   ├── public/         # Progressive enhancement halaman publik
+│   │   └── admin/          # Authentication dan mutation dashboard admin
+│   └── images/             # Folder aset gambar & logo
+├── supabase/
+│   └── sql/                # Schema, security, seed, dan verification SQL
+├── tests/                  # Test JavaScript dengan Node test runner
+└── screenshots/            # Bukti tangkapan layar pengujian visual
 ```
+
+Direktori `core`, `public`, `admin`, `supabase/sql`, dan `tests` masih berupa skeleton. Belum ada module baru yang dimuat halaman, network call, konfigurasi Supabase, atau test runtime.
 
 ### Informasi Kontak Bisnis Resmi
 
