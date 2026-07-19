@@ -182,8 +182,10 @@ declare
 begin
   if tg_table_name = 'products' then
     target_product_id := new.id;
+  elsif tg_op = 'DELETE' then
+    target_product_id := old.product_id;
   else
-    target_product_id := coalesce(new.product_id, old.product_id);
+    target_product_id := new.product_id;
   end if;
 
   if exists (
@@ -206,7 +208,7 @@ begin
 
   if tg_table_name = 'product_images'
     and tg_op = 'UPDATE'
-    and old.product_id <> new.product_id
+    and old.product_id is distinct from new.product_id
     and exists (
       select 1
       from public.products
