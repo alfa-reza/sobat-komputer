@@ -1,14 +1,14 @@
 export const mockContent = {
   hero: {
     id: 'hero-primary',
-    desktop_path: 'assets/images/new-sobat-komputer-hero-desktop-1536x864.webp',
-    mobile_path: 'assets/images/new-sobat-komputer-hero-mobile-864x1080.webp',
+    desktop_path: 'assets/images/hero/new-sobat-komputer-hero-desktop-1536x864.webp',
+    mobile_path: 'assets/images/hero/new-sobat-komputer-hero-mobile-864x1080.webp',
     alt_text: 'Foto depan toko New Sobat Komputer di Kejobong'
   },
   promotions: [
     {
       id: 'promo-1',
-      storage_path: 'assets/images/poster-1-kredit-laptop.png',
+      storage_path: 'assets/images/promotions/poster-1-kredit-laptop.webp',
       alt_text: 'Poster kredit laptop New Sobat Komputer',
       status: 'published',
       starts_at: null,
@@ -18,7 +18,7 @@ export const mockContent = {
     },
     {
       id: 'promo-2',
-      storage_path: 'assets/images/poster-2-pemasangan-cctv.png',
+      storage_path: 'assets/images/promotions/poster-2-pemasangan-cctv.webp',
       alt_text: 'Poster pemasangan CCTV New Sobat Komputer',
       status: 'published',
       starts_at: null,
@@ -28,7 +28,7 @@ export const mockContent = {
     },
     {
       id: 'promo-3',
-      storage_path: 'assets/images/poster-3-jual-laptop.png',
+      storage_path: 'assets/images/promotions/poster-3-jual-laptop.webp',
       alt_text: 'Poster penjualan laptop baru dan second New Sobat Komputer',
       status: 'published',
       starts_at: null,
@@ -38,7 +38,7 @@ export const mockContent = {
     },
     {
       id: 'promo-4',
-      storage_path: 'assets/images/poster-4-set-pc.png',
+      storage_path: 'assets/images/promotions/poster-4-set-pc.webp',
       alt_text: 'Poster paket PC komputer lengkap New Sobat Komputer',
       status: 'published',
       starts_at: null,
@@ -48,7 +48,7 @@ export const mockContent = {
     },
     {
       id: 'promo-draft',
-      storage_path: 'assets/images/poster-1-kredit-laptop.png',
+      storage_path: 'assets/images/promotions/poster-1-kredit-laptop.webp',
       alt_text: 'Poster promo draft New Sobat Komputer',
       status: 'draft',
       starts_at: null,
@@ -58,7 +58,7 @@ export const mockContent = {
     },
     {
       id: 'promo-future',
-      storage_path: 'assets/images/poster-2-pemasangan-cctv.png',
+      storage_path: 'assets/images/promotions/poster-2-pemasangan-cctv.webp',
       alt_text: 'Poster promo mendatang New Sobat Komputer',
       status: 'published',
       starts_at: '2030-01-01T00:00:00.000Z',
@@ -68,7 +68,7 @@ export const mockContent = {
     },
     {
       id: 'promo-expired',
-      storage_path: 'assets/images/poster-3-jual-laptop.png',
+      storage_path: 'assets/images/promotions/poster-3-jual-laptop.webp',
       alt_text: 'Poster promo berakhir New Sobat Komputer',
       status: 'published',
       starts_at: '2025-01-01T00:00:00.000Z',
@@ -84,7 +84,7 @@ export const mockContent = {
       status: 'draft',
       sort_order: 10,
       created_at: '2026-01-01T00:00:00.000Z',
-      images: [{ id: 'draft-image-1', storage_path: 'assets/images/logo.png', alt_text: 'Produk draft', sort_order: 1 }]
+      images: [{ id: 'draft-image-1', storage_path: 'assets/images/brand/logo.webp', alt_text: 'Produk draft', sort_order: 1 }]
     },
     {
       id: 'product-archived',
@@ -92,7 +92,7 @@ export const mockContent = {
       status: 'archived',
       sort_order: 20,
       created_at: '2026-01-02T00:00:00.000Z',
-      images: [{ id: 'archived-image-1', storage_path: 'assets/images/logo.png', alt_text: 'Produk archived', sort_order: 1 }]
+      images: [{ id: 'archived-image-1', storage_path: 'assets/images/brand/logo.webp', alt_text: 'Produk archived', sort_order: 1 }]
     },
     {
       id: 'product-no-images',
@@ -110,7 +110,7 @@ export const mockContent = {
       created_at: '2026-01-04T00:00:00.000Z',
       images: Array.from({ length: 6 }, (_, index) => ({
         id: `six-image-${index + 1}`,
-        storage_path: 'assets/images/logo.png',
+        storage_path: 'assets/images/brand/logo.webp',
         alt_text: `Gambar produk ${index + 1}`,
         sort_order: index + 1
       }))
@@ -121,7 +121,7 @@ export const mockContent = {
       status: 'published',
       sort_order: 50,
       created_at: '2026-01-05T00:00:00.000Z',
-      images: [{ id: 'invalid-image-1', storage_path: '/assets/images/logo.png', alt_text: '', sort_order: 1 }]
+      images: [{ id: 'invalid-image-1', storage_path: '/assets/images/brand/logo.webp', alt_text: '', sort_order: 1 }]
     }
   ]
 };

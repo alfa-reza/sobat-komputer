@@ -8,8 +8,9 @@
   "scripts": {
     "test": "node --test",
     "validate:html": "html-validate \"*.html\"",
+    "validate:images": "node scripts/check-image-budget.mjs",
     "test:e2e": "playwright test",
-    "check": "npm run validate:html && npm test && npm run test:e2e"
+    "check": "npm run validate:html && npm run validate:images && npm test && npm run test:e2e"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,9 @@
   "homepage": "https://github.com/alfa-reza/sobat-komputer#readme",
   "devDependencies": {
     "@playwright/test": "^1.61.1",
+    "glob": "^13.0.6",
     "html-validate": "^11.5.6",
-    "serve": "^14.2.6"
+    "serve": "^14.2.6",
+    "sharp": "^0.35.3"
   }
 }

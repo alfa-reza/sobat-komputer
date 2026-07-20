@@ -52,8 +52,8 @@ test('facade exports exactly three asynchronous read functions', async () => {
 
 test('hero is normalized without raw fields', async () => {
   assert.deepEqual(await api.getHero(), {
-    desktopSrc: 'assets/images/new-sobat-komputer-hero-desktop-1536x864.webp',
-    mobileSrc: 'assets/images/new-sobat-komputer-hero-mobile-864x1080.webp',
+    desktopSrc: 'assets/images/hero/new-sobat-komputer-hero-desktop-1536x864.webp',
+    mobileSrc: 'assets/images/hero/new-sobat-komputer-hero-mobile-864x1080.webp',
     alt: 'Foto depan toko New Sobat Komputer di Kejobong'
   });
 });
