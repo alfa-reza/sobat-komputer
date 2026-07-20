@@ -7,7 +7,8 @@ const pages = [
   '/layanan.html',
   '/produk.html',
   '/promo.html',
-  '/kontak.html'
+  '/kontak.html',
+  '/404.html'
 ];
 
 for (const p of pages) {
@@ -16,6 +17,8 @@ for (const p of pages) {
     expect(response.status()).toBe(200);
 
     await expect(page.locator('main')).toBeVisible();
-    await expect(page.locator('.nav-list')).toBeVisible();
+    if (p !== '/404.html') {
+      await expect(page.locator('.nav-list')).toBeVisible();
+    }
   });
 }

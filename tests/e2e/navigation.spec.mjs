@@ -5,7 +5,8 @@ const pages = [
   '/layanan.html',
   '/produk.html',
   '/promo.html',
-  '/kontak.html'
+  '/kontak.html',
+  '/404.html'
 ];
 
 for (const p of pages) {
@@ -13,6 +14,8 @@ for (const p of pages) {
     const consoleErrors = [];
     page.on('console', msg => {
       if (msg.type() === 'error' && !msg.text().includes('favicon')) {
+        // Ignore 404 errors on 404.html locally because the base tag points to GH Pages path
+        if (p === '/404.html' && msg.text().includes('404 (Not Found)')) return;
         consoleErrors.push(msg.text());
       }
     });
@@ -22,7 +25,11 @@ for (const p of pages) {
 
     await page.waitForLoadState('domcontentloaded');
 
-    await expect(page).toHaveTitle(/Sobat Komputer/i);
+    if (p === '/404.html') {
+      await expect(page).toHaveTitle(/Tidak Ditemukan/i);
+    } else {
+      await expect(page).toHaveTitle(/Sobat Komputer/i);
+    }
     await expect(page.locator('main')).toBeVisible();
 
     expect(consoleErrors).toEqual([]);
