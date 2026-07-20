@@ -9,9 +9,10 @@ Sobat Komputer V2 is a lightweight, high-performance, responsive multi-page stat
 To maintain high load speeds and full compatibility with GitHub Pages (which hosts the production deployment), the project relies on a zero-build pipeline:
 
 *   **Core Structure**: HTML5 Semantic markup (using schema JSON-LD, modern standard viewports).
-*   **Styling (CSS)**: Vanilla CSS3 utilizing CSS custom properties (design tokens), layout models (Grid, Flexbox, Clamp), and fluid typography.
+*   **Typography**: Integrated Google Fonts (`Plus Jakarta Sans`) with `<link rel="preconnect">` for crisp, high-legibility Indonesian business typography with system font fallback.
+*   **Styling (CSS)**: Vanilla CSS3 utilizing CSS custom properties (design tokens), layout models (Grid, Flexbox, Clamp), fluid typography, subtle drop shadows, and glassmorphic translucent headers.
 *   **Behavior (JavaScript)**: Vanilla ES6 JavaScript for UI components (no jQuery or framework dependencies).
-*   **Assets**: Optimized `.webp` and `.ico` image formats to minimize page size and asset requests.
+*   **Assets**: Optimized `.webp`, `.png`, and `.ico` image formats to minimize page size and asset requests.
 
 ---
 
@@ -21,18 +22,22 @@ To maintain high load speeds and full compatibility with GitHub Pages (which hos
 /
 ├── index.html                    # Homepage (Beranda)
 ├── layanan.html                  # Services & SOP detailing (Layanan)
+├── produk.html                   # Product catalog (Produk)
 ├── promo.html                    # Autoplay Carousel & Promotions (Promo)
 ├── kontak.html                   # Contact, Hours, Map & Multi-WhatsApp CTA (Kontak)
-├── LICENSE                       # Project LICENSE (GPL or MIT style)
-├── .gitignore                    # Git ignore configurations (ignoring developer scripts/heavy binaries)
+├── LICENSE                       # Project LICENSE
+├── .gitignore                    # Git ignore configurations (ignoring developer scripts & heavy binaries)
+├── package.json                  # Local package manifest for testing & Playwright QA
 ├── assets/
 │   ├── css/
 │   │   └── style.css             # Unified global stylesheet
 │   ├── js/
-│   │   └── main.js               # Core interactivity script (Menu, BackToTop, Carousel)
+│   │   ├── main.js               # Core interactivity script (Menu, BackToTop)
+│   │   ├── core/                 # Core logic modules (WhatsApp URL builder, Normalizers)
+│   │   └── public/               # Public page initialization scripts (Hero, Carousel, Products)
 │   └── images/                   # Optimized images and brand assets (.webp, .png)
-├── scratch/                      # Utility scripts for local checks and visual regression QA (ignored)
-└── .opencode/                    # Planning artifacts, design documents, and mockup layouts (ignored)
+├── tests/                        # Automated unit tests run via Node.js native test runner
+└── scratch/                      # Utility scripts for local checks, Playwright QA & screenshots
 ```
 
 ---
@@ -41,20 +46,23 @@ To maintain high load speeds and full compatibility with GitHub Pages (which hos
 
 ### 1. Static Pages (`.html` files)
 
-All pages are optimized for SEO and accessibility (A11y) using unique heading structures, `alt` tags, local business structural JSON-LD metadata, and relative links (allowing them to load correctly on GitHub subdirectories).
+All pages are optimized for SEO and accessibility (A11y) using unique heading structures, `alt` tags, local business structural JSON-LD metadata, Google Fonts preconnect, and relative links (allowing them to load correctly on GitHub subdirectories).
 
-*   **[index.html](file:///home/alfareza/Project/sobat-komputer/index.html)**:
+*   **[index.html](index.html)**:
     *   **Hero Section**: Employs `<picture>` element with responsive layouts. Mobile uses `new-sobat-komputer-hero-mobile-864x1080.webp`, desktop displays `new-sobat-komputer-hero-desktop-1536x864.webp`.
     *   **Local Business Metadata**: Embedded in the `<head>` using `<script type="application/ld+json">` outlining business coordinates, hours, and contact details.
     *   **A11y Skip-Link**: Anchored at the top of the body `.skip-link` pointing to `#main-content`.
-*   **[layanan.html](file:///home/alfareza/Project/sobat-komputer/layanan.html)**:
+    *   **CTA Box**: Directs customers to official WhatsApp support (`+62 889-8004-2670`).
+*   **[layanan.html](layanan.html)**:
     *   **Service Card Grid**: Displays categories (Laptop, PC, Printer, CCTV, iPrime Internet, etc.) styled as responsive cards.
     *   **SOP & Guarantee Flow**: Lists precise diagnostic workflows and clear repair guidelines.
-*   **[promo.html](file:///home/alfareza/Project/sobat-komputer/promo.html)**:
+*   **[produk.html](produk.html)**:
+    *   **Product Catalog Region**: Dynamically populated product list with direct WhatsApp inquiry URL generation.
+*   **[promo.html](promo.html)**:
     *   **Promotional Carousel Container**: Built utilizing a responsive track containing sliding items, interactive indicator dots, and manual control overrides.
-*   **[kontak.html](file:///home/alfareza/Project/sobat-komputer/kontak.html)**:
+*   **[kontak.html](kontak.html)**:
+    *   **Interactive Info Cards**: Features SVG icon-enhanced cards for Operating Hours, Address, and Multi-WhatsApp Representatives.
     *   **Interactive Embed**: Incorporates Google Maps iframe using lazy loading (`loading="lazy"`).
-    *   **Triple Contact Points**: Custom grids pointing to three distinct official support representatives.
 
 ---
 
@@ -62,19 +70,21 @@ All pages are optimized for SEO and accessibility (A11y) using unique heading st
 
 The CSS codebase is organized into modular layout files and components following a clear semantic sequence:
 
-1.  **Reset & Base**: Modern box-sizing models, smooth scrolling defaults (`scroll-behavior: smooth`), typography parameters, and outline behaviors.
+1.  **Reset & Base**: Modern box-sizing models, smooth scrolling defaults (`scroll-behavior: smooth`), typography parameters, normalize `<address>` italics, and outline behaviors.
 2.  **Design Tokens (`:root`)**:
     *   `--bg`: `#fffbf7` (warm cream background)
-    *   `--surface`: `#ffffff`
-    *   `--ink`: `#2e2520` (charcoal theme text)
+    *   `--surface`: `#ffffff` (surface color)
+    *   `--ink`: `#2e2520` (charcoal text with warm undertone)
     *   `--muted`: `#7a6f67` (soft description text)
     *   `--accent` & `--accent-hover`: `#d97706` / `#b45309` (signature brand amber colors)
     *   `--wa-green`: `#25d366`
     *   `--border`: `#e8e5e1`
     *   `--radius`: `16px`
-3.  **Typography**: Utilizes responsive system fonts (`system-ui`) and limits line lengths to optimal reading widths (`max-width: 70ch`).
+    *   `--font`: `'Plus Jakarta Sans', system-ui, -apple-system, sans-serif`
+    *   `--shadow-sm`, `--shadow-md`, `--shadow-lg`: Smooth drop shadow tokens
+3.  **Typography**: Utilizes responsive system fonts (`Plus Jakarta Sans`) and limits line lengths to optimal reading widths (`max-width: 70ch`).
 4.  **Layout Systems**: Implements fluid styling variables such as `width: min(100% - 2rem, var(--max-w))` to construct self-adjusting grid container blocks.
-5.  **Components**: Houses visual declarations for Headers, Navigation lists, responsive Hamburger toggle button, Footers, and CTA Buttons.
+5.  **Components**: Houses visual declarations for Headers, Navigation lists, responsive Hamburger toggle button, Footers, Info Cards, and CTA Buttons.
 
 ---
 
@@ -107,32 +117,23 @@ python3 -m http.server 8000
 Open `http://localhost:8000` in your web browser.
 
 ### 🧪 QA & Verification Automation
-Inside the `/scratch/` directory, utility scripts help to validate the codebase before committing.
 
-#### 1. Link Check & Integrity Validator
-Scans all `.html` pages to detect missing local assets, broken paths, or invalid target page IDs.
+#### 1. Native Unit Tests Suite
+Runs all 38 unit tests covering navigation, product rules, carousel, WhatsApp URL sanitization, and content normalization:
 ```bash
-node scratch/validate_links.js
+node --test tests/*.test.mjs
 ```
 
-#### 2. Formatting Check (Whitespace validator)
-Scans files for trailing whitespace:
+#### 2. Playwright UI/UX Audit & Responsiveness Check
+Runs an automated Playwright headless browser check across all 5 pages for horizontal overflow, broken images, and mobile navigation status:
 ```bash
-git diff --check
-```
-To strip trailing whitespaces programmatically:
-```bash
-node scratch/cleanup_whitespaces.js
+node scratch/audit_pages.mjs
 ```
 
-#### 3. Capture screenshots locally
-Launches a server and takes high-resolution viewports screenshots:
+#### 3. Capture Screenshots
+Launches a local server and captures high-resolution desktop and mobile viewport screenshots:
 ```bash
-# Install Puppeteer and local dependencies
-cd scratch && npm install && cd ..
-
-# Capture responsive layout screenshots
-node scratch/take_after_screenshots.js
+node scratch/capture_screenshots.mjs
 ```
 
 ---
@@ -144,8 +145,7 @@ node scratch/take_after_screenshots.js
 3.  **No Direct Pricing**: Service pricing or product details should not be displayed in the markup.
 4.  **No-JS Baseline**: Ensure primary navigation links and key service layouts remain fully functional when JavaScript is disabled in client browsers.
 5.  **Official WhatsApp Numbers**:
-    *   Primary CTA: `6285742744594`
-    *   Contact Hub 1: `6285742744594`
+    *   Primary CTA / Hub 1: `6285742744594`
     *   Contact Hub 2: `6285185062811`
-    *   Contact Hub 3: `6288980042670`
+    *   Direct CTA / Support Hub 3: `6288980042670`
     *   Official Catalog: `https://wa.me/c/6288980042670`
