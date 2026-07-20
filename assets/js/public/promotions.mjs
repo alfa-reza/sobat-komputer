@@ -1,8 +1,6 @@
 import { getPromotions } from '../core/content-api.mjs';
 import { initCarousel } from './carousel.mjs';
 
-const PRIMARY_WHATSAPP_URL = 'https://wa.me/6285742744594?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20mau%20tanya%20promo%20terbaru.';
-
 export function normalizePromotionCandidates(value) {
   if (!Array.isArray(value)) return null;
 
@@ -87,12 +85,19 @@ function createEmptyCandidate() {
 
   const link = document.createElement('a');
   link.className = 'btn btn-wa';
-  link.href = PRIMARY_WHATSAPP_URL;
+  link.href = 'https://wa.me/6285185062811?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20mau%20tanya%20detail%20promo%20terbaru.';
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   link.textContent = 'Tanya Promo via WhatsApp';
 
-  empty.append(message, link);
+  const catalogLink = document.createElement('a');
+  catalogLink.className = 'btn btn-catalog mt-1';
+  catalogLink.href = 'https://wa.me/c/6288980042670';
+  catalogLink.target = '_blank';
+  catalogLink.rel = 'noopener noreferrer';
+  catalogLink.textContent = 'Lihat Katalog WhatsApp';
+
+  empty.append(message, link, catalogLink);
   return empty;
 }
 
