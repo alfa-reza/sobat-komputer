@@ -110,39 +110,44 @@ Provides client side optimizations. All scripts degrade gracefully in JS-disable
 ## 🛠️ Local Development & Tools Execution
 
 ### 🚀 Required Tooling
-The project requires Node LTS (verified with `v24.18.0`) to run tests and verification scripts. Ensure your dependencies are installed first:
+The project requires Node LTS (verified with `v24`) to run tests and verification scripts. Ensure your dependencies are installed first:
 ```bash
-npm install
+npm ci
 ```
 
 ### 🚀 Running the site locally
-Start a simple Python local server inside the repository root directory:
+Start a simple local development server. Note: GitHub Pages deployment uses `<base href="/sobat-komputer/">` on error pages which may cause 404s when previewing locally unless served from a parent directory.
 ```bash
-python3 -m http.server 8000
+npx serve -p 3000
 ```
-Open `http://localhost:8000` in your web browser.
+Open `http://localhost:3000` in your web browser.
 
 ### 🧪 QA & Verification Automation
 
-#### 1. Native Unit Tests Suite
-Runs all 38 unit tests covering navigation, product rules, carousel, WhatsApp URL sanitization, and content normalization:
+Run the full aggregate check (HTML validation, image budgets, unit tests, E2E tests, accessibility, responsiveness, visual snapshots):
 ```bash
-npm test
+npm run check
 ```
 
-#### 2. Playwright UI/UX Audit & Responsiveness Check
-Runs an automated Playwright headless browser check across all 5 pages for horizontal overflow, broken images, and mobile navigation status:
-```bash
-node scratch/audit_pages.mjs
-```
+For individual checks:
+- **Unit Tests**: `npm test`
+- **E2E & Visual Tests**: `npm run test:e2e`
+- **Update Visual Snapshots**: `npx playwright test tests/e2e/visual.spec.mjs --update-snapshots`
+- **HTML Validation**: `npm run validate:html`
+- **Image Budget Validation**: `npm run validate:images`
 
-#### 3. Capture Screenshots
-Launches a local server and captures high-resolution desktop and mobile viewport screenshots:
-```bash
-node scratch/capture_screenshots.mjs
-```
+### 🖼️ Image Workflow (Input/Output & Profiles)
 
----
+Place high-resolution unoptimized source images in `assets/images/` (e.g. `logo.png`). Then run the optimization script to generate WebP assets based on defined budgets (e.g. hero, promotion, logo):
+```bash
+node scripts/optimize-images.mjs
+```
+The optimized files will be generated in `assets/images/brand`, `assets/images/hero`, and `assets/images/promotions`.
+
+To replace placeholder images with final photos, drop the new high-resolution images in `assets/images/`, update `scripts/optimize-images.mjs` input mappings if the filename differs, and rerun the script. Then, ensure `npm run validate:images` passes.
+
+### 🌐 GitHub Pages Deployment
+Deployment is fully automated. Pushing to `main` triggers the `Quality Gates` workflow (`.github/workflows/quality.yml`). If all tests pass, GitHub Pages automatically deploys the repository to `https://alfa-reza.github.io/sobat-komputer/`. The configuration uses the root directory without any build steps.
 
 ## 🔒 Project Rules & Scope boundaries
 
