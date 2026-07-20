@@ -7,7 +7,9 @@
   },
   "scripts": {
     "test": "node --test",
-    "check": "npm run test"
+    "validate:html": "html-validate \"*.html\"",
+    "test:e2e": "playwright test",
+    "check": "npm run validate:html && npm test && npm run test:e2e"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,9 @@
     "url": "https://github.com/alfa-reza/sobat-komputer/issues"
   },
   "homepage": "https://github.com/alfa-reza/sobat-komputer#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "html-validate": "^11.5.6",
+    "serve": "^14.2.6"
+  }
 }
