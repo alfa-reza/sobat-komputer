@@ -85,7 +85,7 @@ function createEmptyCandidate() {
 
   const link = document.createElement('a');
   link.className = 'btn btn-wa';
-  link.href = 'https://wa.me/6285185062811?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20mau%20tanya%20detail%20promo%20terbaru.';
+  link.href = 'https://wa.me/6288980042670?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20mau%20tanya%20detail%20promo%20terbaru.';
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   link.textContent = 'Tanya Promo via WhatsApp';

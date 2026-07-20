@@ -27,8 +27,8 @@ test.describe('Promo Carousel', () => {
     const catalogLink = page.locator('a.btn-catalog');
     await expect(catalogLink.first()).toBeVisible();
     
-    const waLink = page.locator('a.btn-wa').first();
-    await expect(waLink).toHaveAttribute('href', /wa\.me\/6285185062811/);
+    const waLink = page.locator('.promo-action-buttons a.btn-wa');
+    await expect(waLink).toHaveAttribute('href', /wa\.me\/6288980042670/);
     
     await context.close();
   });

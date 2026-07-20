@@ -1,7 +1,7 @@
 import { getProducts } from '../core/content-api.mjs';
 import { buildWhatsAppUrl } from '../core/whatsapp.mjs';
 
-const EMPTY_WHATSAPP_URL = 'https://wa.me/6285185062811?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia.';
+const EMPTY_WHATSAPP_URL = 'https://wa.me/6288980042670?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia.';
 
 export function normalizeProductCandidates(value) {
   if (!Array.isArray(value)) return null;

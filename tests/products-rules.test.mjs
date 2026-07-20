@@ -57,8 +57,8 @@ test('builds restricted views and routes to Admin 2 without reference code', () 
   const url = new URL(views[0].whatsappUrl);
   const message = url.searchParams.get('text');
   
-  // Routes to Admin 2 based on ASM-001 (085185062811 -> 6285185062811)
-  assert.equal(url.pathname, '/6285185062811');
+  // Routes to Admin 2
+  assert.equal(url.pathname, '/6288980042670');
   
   // Exact generic product template without code/page reference
   assert.equal(message, 'Halo New Sobat Komputer, saya ingin menanyakan produk yang tersedia.');

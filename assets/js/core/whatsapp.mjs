@@ -1,6 +1,27 @@
-const WHATSAPP_BASE_URL = 'https://wa.me/6285742744594';
-const REFERENCE_PATTERN = /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/;
-const SENSITIVE_QUERY_KEY = /^(?:access[_-]?token|refresh[_-]?token|auth|authorization|code|credential|key|password|session|token)$/i;
+import { CONTACTS } from './contacts.mjs';
+
+const INTENTS = Object.freeze({
+  GENERAL: Object.freeze({
+    contact: CONTACTS.OWNER,
+    template: 'Halo New Sobat Komputer, saya mendapatkan informasi dari website.'
+  }),
+  SERVICE: Object.freeze({
+    contact: CONTACTS.OWNER,
+    template: 'Halo New Sobat Komputer, saya ingin menanyakan layanan servis.'
+  }),
+  PRODUCT: Object.freeze({
+    contact: CONTACTS.ADMIN_2,
+    template: 'Halo New Sobat Komputer, saya ingin menanyakan produk yang tersedia.'
+  }),
+  PROMO: Object.freeze({
+    contact: CONTACTS.ADMIN_2,
+    template: 'Halo New Sobat Komputer, saya mau tanya detail promo terbaru.'
+  }),
+  LOCATION: Object.freeze({
+    contact: CONTACTS.OWNER,
+    template: 'Halo New Sobat Komputer, saya ingin menanyakan lokasi toko.'
+  })
+});
 
 function validationError() {
   const error = new Error('Invalid WhatsApp request.');
@@ -9,35 +30,11 @@ function validationError() {
   return error;
 }
 
-function sanitizePageUrl(value) {
-  let url;
-  try {
-    url = new URL(value);
-  } catch {
-    throw validationError();
-  }
+export function buildWhatsAppUrl({ intent } = {}) {
+  if (typeof intent !== 'string') throw validationError();
+  const key = intent.toUpperCase();
+  if (!INTENTS[key]) throw validationError();
 
-  if (url.protocol !== 'http:' && url.protocol !== 'https:') throw validationError();
-
-  url.username = '';
-  url.password = '';
-  url.hash = '';
-  for (const key of [...url.searchParams.keys()]) {
-    if (SENSITIVE_QUERY_KEY.test(key)) url.searchParams.delete(key);
-  }
-
-  return url.href;
-}
-
-export function buildWhatsAppUrl({ contentType, reference, pageUrl } = {}) {
-  if (typeof contentType !== 'string' || !/^[A-Za-z]+$/.test(contentType)) throw validationError();
-  if (typeof reference !== 'string' || reference.length < 3 || reference.length > 30 || !REFERENCE_PATTERN.test(reference)) {
-    throw validationError();
-  }
-
-  const type = contentType.toLocaleLowerCase('id-ID');
-  const currentPage = sanitizePageUrl(pageUrl);
-  const message = `Halo New Sobat Komputer, saya ingin menanyakan ${type} dengan referensi ${reference}. Halaman: ${currentPage}`;
-
-  return `${WHATSAPP_BASE_URL}?text=${encodeURIComponent(message)}`;
+  const config = INTENTS[key];
+  return `https://wa.me/${config.contact}?text=${encodeURIComponent(config.template)}`;
 }

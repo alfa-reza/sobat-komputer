@@ -13,7 +13,7 @@ test.describe('Produk Carousel', () => {
     await expect(image).toBeVisible();
     
     const link = firstSlide.locator('a.product-photo-action');
-    await expect(link).toHaveAttribute('href', /wa\.me\/6285185062811/);
+    await expect(link).toHaveAttribute('href', /wa\.me\/6288980042670/);
   });
 
   test('provides no-JS fallback with a static item and catalog link', async ({ browser }) => {

@@ -8,75 +8,38 @@ function parseResult(options) {
   return { url, message: url.searchParams.get('text') };
 }
 
-test('builds a deterministic product inquiry URL', () => {
-  const result = parseResult({
-    contentType: 'Produk',
-    reference: 'LAPTOP-001',
-    pageUrl: 'https://example.com/produk.html'
-  });
+test('builds WhatsApp URLs according to intent', () => {
+  const general = parseResult({ intent: 'GENERAL' });
+  assert.equal(general.url.origin, 'https://wa.me');
+  assert.equal(general.url.pathname, '/6285742744594');
+  assert.equal(general.message, 'Halo New Sobat Komputer, saya mendapatkan informasi dari website.');
 
-  assert.equal(result.url.origin, 'https://wa.me');
-  assert.equal(result.url.pathname, '/6285742744594');
-  assert.equal(result.url.searchParams.size, 1);
-  assert.equal(result.message, 'Halo New Sobat Komputer, saya ingin menanyakan produk dengan referensi LAPTOP-001. Halaman: https://example.com/produk.html');
-  assert.equal(buildWhatsAppUrl({ contentType: 'Produk', reference: 'LAPTOP-001', pageUrl: 'https://example.com/produk.html' }), buildWhatsAppUrl({ contentType: 'Produk', reference: 'LAPTOP-001', pageUrl: 'https://example.com/produk.html' }));
+  const product = parseResult({ intent: 'PRODUCT' });
+  assert.equal(product.url.pathname, '/6288980042670');
+  assert.equal(product.message, 'Halo New Sobat Komputer, saya ingin menanyakan produk yang tersedia.');
+
+  const promo = parseResult({ intent: 'PROMO' });
+  assert.equal(promo.url.pathname, '/6288980042670');
+  assert.equal(promo.message, 'Halo New Sobat Komputer, saya mau tanya detail promo terbaru.');
+  
+  const service = parseResult({ intent: 'SERVICE' });
+  assert.equal(service.url.pathname, '/6285742744594');
+  assert.equal(service.message, 'Halo New Sobat Komputer, saya ingin menanyakan layanan servis.');
+  
+  const location = parseResult({ intent: 'LOCATION' });
+  assert.equal(location.url.pathname, '/6285742744594');
+  assert.equal(location.message, 'Halo New Sobat Komputer, saya ingin menanyakan lokasi toko.');
 });
 
-test('encodes Unicode page paths without losing safe query values', () => {
-  const { message } = parseResult({
-    contentType: 'produk',
-    reference: 'PC-SET-2',
-    pageUrl: 'https://example.com/katalog/komputer murah?warna=hitam putih'
-  });
-
-  assert.equal(message, 'Halo New Sobat Komputer, saya ingin menanyakan produk dengan referensi PC-SET-2. Halaman: https://example.com/katalog/komputer%20murah?warna=hitam%20putih');
+test('intent matching is case-insensitive', () => {
+  const lower = parseResult({ intent: 'general' });
+  const upper = parseResult({ intent: 'GENERAL' });
+  assert.equal(lower.url.href, upper.url.href);
 });
 
-test('removes embedded credentials, fragments, and sensitive query values', () => {
-  const { message } = parseResult({
-    contentType: 'Promo',
-    reference: 'PROMO-2026',
-    pageUrl: 'https://user:password@example.com/promo.html?campaign=ramadan&token=secret&access_token=secret&session=secret#private'
-  });
-
-  assert.equal(message, 'Halo New Sobat Komputer, saya ingin menanyakan promo dengan referensi PROMO-2026. Halaman: https://example.com/promo.html?campaign=ramadan');
-  assert.ok(!message.includes('password'));
-  assert.ok(!message.includes('secret'));
-  assert.ok(!message.includes('#'));
-});
-
-test('removes every sensitive parameter occurrence case-insensitively', () => {
-  const { message } = parseResult({
-    contentType: 'produk',
-    reference: 'UNIT-123',
-    pageUrl: 'https://example.com/produk?Token=one&TOKEN=two&refresh-token=three&key=four&safe=yes'
-  });
-
-  assert.equal(message, 'Halo New Sobat Komputer, saya ingin menanyakan produk dengan referensi UNIT-123. Halaman: https://example.com/produk?safe=yes');
-});
-
-test('rejects empty and malformed references with a safe error', () => {
-  const base = { contentType: 'produk', pageUrl: 'https://example.com/produk.html' };
-  for (const reference of ['', 'AB', 'BAD REF', 'BAD_', '-BAD', 'A'.repeat(31), null]) {
-    assert.throws(() => buildWhatsAppUrl({ ...base, reference }), {
-      name: 'WhatsAppUrlError',
-      code: 'VALIDATION_ERROR',
-      message: 'Invalid WhatsApp request.'
-    });
-  }
-});
-
-test('rejects invalid content types and unsafe page URLs', () => {
-  const base = { contentType: 'produk', reference: 'UNIT-123', pageUrl: 'https://example.com/produk.html' };
-  for (const override of [
-    { contentType: '' },
-    { contentType: 'produk baru' },
-    { pageUrl: 'javascript:alert(1)' },
-    { pageUrl: '/produk.html' },
-    { pageUrl: 'not a url' },
-    { pageUrl: null }
-  ]) {
-    assert.throws(() => buildWhatsAppUrl({ ...base, ...override }), {
+test('rejects missing and invalid intents with a safe error', () => {
+  for (const intent of [undefined, null, '', 'UNKNOWN', 123, {}, []]) {
+    assert.throws(() => buildWhatsAppUrl({ intent }), {
       name: 'WhatsAppUrlError',
       code: 'VALIDATION_ERROR',
       message: 'Invalid WhatsApp request.'
