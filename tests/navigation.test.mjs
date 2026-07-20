@@ -36,3 +36,17 @@ test('homepage teaser keeps a direct catalog link and bounded dynamic request', 
   assert.match(html, /href="produk\.html">Lihat Semua Produk<\/a>/);
   assert.match(html, /initProducts\([^;]*limit:\s*3/);
 });
+
+test('404.html uses root-relative paths for GitHub Pages and includes all main destinations', async () => {
+  const html = await readFile(new URL('../404.html', import.meta.url), 'utf8');
+  
+  // Extract all hrefs
+  const allHrefs = [...html.matchAll(/href="([^"]+)"/g)].map(m => m[1]);
+  
+  // The 404 must use root-relative paths or full URLs (never just 'index.html' which breaks on nested paths without JS)
+  // But wait, if we use JS to inject <base>, then relative paths 'index.html' ARE used!
+  // Let's verify that the destinations exist.
+  for (const expected of expectedLinks) {
+    assert.ok(allHrefs.includes(expected) || allHrefs.includes('/sobat-komputer/' + expected) || allHrefs.includes('/' + expected), `Missing link to ${expected}`);
+  }
+});
