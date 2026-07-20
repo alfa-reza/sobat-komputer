@@ -1,0 +1,28 @@
+{
+  "name": "sobat-komputer",
+  "version": "1.0.0",
+  "description": "Sobat Komputer V2 is a lightweight, high-performance, responsive multi-page static website for **New Sobat Komputer** located in Kejobong, Purbalingga. Built with zero-build requirements using semantic HTML5, clean CSS3 styling, and modern ES6 vanilla JavaScript.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alfa-reza/sobat-komputer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/alfa-reza/sobat-komputer/issues"
+  },
+  "homepage": "https://github.com/alfa-reza/sobat-komputer#readme",
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.78",
+    "playwright": "^1.62.0-alpha-1783623505000"
+  }
+}
