@@ -51,9 +51,21 @@
         <h2 class="section-title" id="product-catalog-title">Katalog Produk</h2>
         <p class="section-sub">Pilih produk lalu hubungi kami untuk menanyakan ketersediaannya.</p>
         <div class="product-region" data-products>
-          <div class="product-empty" role="status">
-            <p>Belum ada produk yang ditampilkan saat ini.</p>
-            <a class="btn btn-wa" href="https://wa.me/6285742744594?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia." target="_blank" rel="noopener noreferrer">Tanya Produk via WhatsApp</a>
+          <div class="carousel" data-carousel="product" data-carousel-noun="Produk" role="group" aria-roledescription="carousel" aria-label="Produk Tersedia">
+            <div class="carousel-container" aria-live="polite">
+              <article class="carousel-slide" data-index="0" role="group" aria-roledescription="slide" aria-label="Produk 1 dari 1" data-active="">
+                <div class="product-photo-wrapper">
+                  <a class="product-photo-action" href="https://wa.me/6285185062811?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia." target="_blank" rel="noopener noreferrer" aria-label="Tanyakan produk ini melalui WhatsApp">
+                    <img src="assets/images/brand/logo.webp" alt="Logo New Sobat Komputer" loading="eager" decoding="async" class="product-photo">
+                  </a>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="product-actions">
+            <a class="btn btn-catalog mt-1" href="https://wa.me/c/6288980042670" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Buka Katalog Resmi
+            </a>
           </div>
         </div>
       </div>
@@ -102,9 +114,13 @@
   </button>
 
   <script type="module">
+    import { initCarousel } from './assets/js/public/carousel.mjs';
     import { initProducts } from './assets/js/public/products.mjs';
 
-    initProducts(document.querySelector('[data-products]'), { pageUrl: window.location.href });
+    initProducts(document.querySelector('[data-products]'), { 
+      pageUrl: window.location.href,
+      initCarouselFn: initCarousel
+    });
   </script>
 </body>
 </html>

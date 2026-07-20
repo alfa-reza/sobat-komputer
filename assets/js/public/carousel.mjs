@@ -20,6 +20,8 @@ export function initCarousel(root) {
   if (!viewport || !track || slides.length === 0) return null;
 
   const rules = getCarouselRules(slides.length);
+  const noun = root.dataset.carouselNoun || 'Poster';
+  const nounLower = noun.toLowerCase();
   const previousButton = root.querySelector('.carousel-btn.prev');
   const nextButton = root.querySelector('.carousel-btn.next');
   const playPauseButton = root.querySelector('.play-pause');
@@ -56,7 +58,7 @@ export function initCarousel(root) {
     slides.forEach((slide, index) => {
       const inactive = index !== currentIndex;
       slide.setAttribute('aria-hidden', String(inactive));
-      slide.setAttribute('aria-label', `Poster ${index + 1} dari ${rules.count}`);
+      slide.setAttribute('aria-label', `${noun} ${index + 1} dari ${rules.count}`);
       slide.inert = inactive;
     });
 
@@ -104,7 +106,7 @@ export function initCarousel(root) {
       button.type = 'button';
       button.className = 'indicator-dot';
       button.dataset.carouselIndex = String(index);
-      button.setAttribute('aria-label', `Buka poster ${index + 1}`);
+      button.setAttribute('aria-label', `Buka ${nounLower} ${index + 1}`);
       return button;
     }));
     indicators.addEventListener('click', (event) => {

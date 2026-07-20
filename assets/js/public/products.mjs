@@ -1,47 +1,42 @@
 import { getProducts } from '../core/content-api.mjs';
 import { buildWhatsAppUrl } from '../core/whatsapp.mjs';
 
-const EMPTY_WHATSAPP_URL = 'https://wa.me/6285742744594?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia.';
+const EMPTY_WHATSAPP_URL = 'https://wa.me/6285185062811?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia.';
 
 export function normalizeProductCandidates(value) {
   if (!Array.isArray(value)) return null;
 
   const candidates = value.map((product) => {
     if (!product || typeof product !== 'object' || Array.isArray(product)) return null;
-    if (typeof product.id !== 'string' || typeof product.referenceCode !== 'string' || !Array.isArray(product.images)) return null;
+    if (typeof product.id !== 'string') return null;
     const id = product.id.trim();
-    const referenceCode = product.referenceCode.trim();
-    if (!id || !referenceCode || product.images.length < 1 || product.images.length > 5) return null;
+    if (!id) return null;
 
-    const images = product.images.map((image) => {
-      if (!image || typeof image !== 'object' || Array.isArray(image)) return null;
-      if (typeof image.src !== 'string' || typeof image.alt !== 'string' || !Number.isInteger(image.position)) return null;
-      const src = image.src.trim();
-      const alt = image.alt.trim();
-      return src && alt && image.position >= 1 && image.position <= 5
-        ? Object.freeze({ src, alt, position: image.position })
-        : null;
-    });
-    if (!images.every(Boolean) || new Set(images.map(({ position }) => position)).size !== images.length) return null;
+    const image = product.image;
+    if (!image || typeof image !== 'object' || Array.isArray(image)) return null;
+    if (typeof image.src !== 'string' || typeof image.alt !== 'string') return null;
+    
+    const src = image.src.trim();
+    const alt = image.alt.trim();
+    if (!src || !alt) return null;
 
     return Object.freeze({
       id,
-      referenceCode,
-      images: Object.freeze([...images].sort((left, right) => left.position - right.position))
+      image: Object.freeze({ src, alt })
     });
   });
 
   return candidates.every(Boolean) ? Object.freeze(candidates) : null;
 }
 
-export function buildProductViews(products, { pageUrl } = {}) {
+export function buildProductViews(products) {
   return products.map((product, productIndex) => Object.freeze({
     id: product.id,
-    images: Object.freeze(product.images.map((image, imageIndex) => Object.freeze({
-      ...image,
-      loading: productIndex === 0 && imageIndex === 0 ? 'eager' : 'lazy'
-    }))),
-    whatsappUrl: buildWhatsAppUrl({ contentType: 'Produk', reference: product.referenceCode, pageUrl })
+    image: Object.freeze({
+      ...product.image,
+      loading: productIndex === 0 ? 'eager' : 'lazy'
+    }),
+    whatsappUrl: EMPTY_WHATSAPP_URL
   }));
 }
 
@@ -55,7 +50,7 @@ function preloadImage(src) {
 }
 
 export async function preloadProductViews(views, loadImage = preloadImage) {
-  await Promise.all(views.flatMap(({ images }) => images.map(({ src }) => loadImage(src))));
+  await Promise.all(views.map(({ image }) => loadImage(image.src)));
   return views;
 }
 
@@ -77,52 +72,119 @@ function createEmptyCandidate() {
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   link.textContent = 'Tanya Produk via WhatsApp';
+  
+  const catalogLink = document.createElement('a');
+  catalogLink.className = 'btn btn-catalog mt-1';
+  catalogLink.href = 'https://wa.me/c/6288980042670';
+  catalogLink.target = '_blank';
+  catalogLink.rel = 'noopener noreferrer';
+  catalogLink.textContent = 'Lihat Katalog WhatsApp';
 
-  empty.append(message, link);
+  empty.append(message, link, catalogLink);
   root.append(empty);
   return root;
 }
 
-function createProductCard(view) {
-  const card = document.createElement('article');
-  card.className = 'product-card';
-  card.dataset.productId = view.id;
-
-  const images = document.createElement('div');
-  images.className = 'product-images';
-  images.append(...view.images.map((item) => {
-    const image = document.createElement('img');
-    image.src = item.src;
-    image.alt = item.alt;
-    image.loading = item.loading;
-    image.decoding = 'async';
-    return image;
-  }));
-
-  const link = document.createElement('a');
-  link.className = 'btn btn-wa';
-  link.href = view.whatsappUrl;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  link.textContent = 'Tanya via WhatsApp';
-
-  card.append(images, link);
-  return card;
-}
-
-function createProductCandidate(views) {
+function createProductCarousel(views) {
   const root = document.createElement('div');
   root.className = 'product-region';
   root.dataset.products = '';
 
-  const grid = document.createElement('div');
-  grid.className = 'product-grid';
-  grid.append(...views.map(createProductCard));
-  root.append(grid);
+  const carousel = document.createElement('div');
+  carousel.className = 'carousel';
+  carousel.dataset.carousel = 'product';
+  carousel.dataset.carouselNoun = 'Produk';
+  carousel.setAttribute('role', 'group');
+  carousel.setAttribute('aria-roledescription', 'carousel');
+  carousel.setAttribute('aria-label', 'Produk Tersedia');
+
+  const viewport = document.createElement('div');
+  viewport.className = 'carousel-viewport';
+  viewport.setAttribute('aria-live', 'polite');
+  
+  const track = document.createElement('div');
+  track.className = 'carousel-track';
+
+  views.forEach((view, index) => {
+    const slide = document.createElement('article');
+    slide.className = 'carousel-slide';
+    slide.dataset.index = String(index);
+    slide.setAttribute('role', 'group');
+    slide.setAttribute('aria-roledescription', 'slide');
+    slide.setAttribute('aria-label', `Produk ${index + 1} dari ${views.length}`);
+    if (index === 0) slide.dataset.active = '';
+
+    const imageWrapper = document.createElement('div');
+    imageWrapper.className = 'product-photo-wrapper';
+    
+    const image = document.createElement('img');
+    image.src = view.image.src;
+    image.alt = view.image.alt;
+    image.loading = view.image.loading;
+    image.decoding = 'async';
+    image.className = 'product-photo';
+
+    const action = document.createElement('a');
+    action.className = 'product-photo-action';
+    action.href = view.whatsappUrl;
+    action.target = '_blank';
+    action.rel = 'noopener noreferrer';
+    action.setAttribute('aria-label', 'Tanyakan produk ini melalui WhatsApp');
+    action.appendChild(image);
+
+    imageWrapper.appendChild(action);
+    slide.appendChild(imageWrapper);
+    track.appendChild(slide);
+  });
+  
+  viewport.appendChild(track);
+  carousel.appendChild(viewport);
+
+  if (views.length > 1) {
+    const controls = document.createElement('div');
+    controls.className = 'carousel-controls';
+
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.className = 'carousel-btn prev';
+    prev.dataset.carouselPrev = '';
+    prev.setAttribute('aria-label', 'Produk sebelumnya');
+    prev.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>';
+
+    const status = document.createElement('div');
+    status.className = 'carousel-status';
+    status.dataset.carouselStatus = '';
+    status.setAttribute('aria-hidden', 'true');
+    status.textContent = `1 / ${views.length}`;
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.className = 'carousel-btn next';
+    next.dataset.carouselNext = '';
+    next.setAttribute('aria-label', 'Produk selanjutnya');
+    next.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>';
+
+    controls.append(prev, status, next);
+    carousel.appendChild(controls);
+  }
+
+  const actions = document.createElement('div');
+  actions.className = 'product-actions';
+  
+  const catalogLink = document.createElement('a');
+  catalogLink.className = 'btn btn-catalog mt-1';
+  catalogLink.href = 'https://wa.me/c/6288980042670';
+  catalogLink.target = '_blank';
+  catalogLink.rel = 'noopener noreferrer';
+  catalogLink.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg> Buka Katalog Resmi';
+  
+  actions.appendChild(catalogLink);
+  root.append(carousel, actions);
+  
   return root;
 }
 
-export async function initProducts(root, { limit, pageUrl, loadProducts = getProducts, loadImage = preloadImage } = {}) {
+export async function initProducts(root, { limit, pageUrl, loadProducts = getProducts, loadImage = preloadImage, initCarouselFn } = {}) {
   if (!root || typeof root.replaceWith !== 'function') return false;
 
   try {
@@ -131,8 +193,12 @@ export async function initProducts(root, { limit, pageUrl, loadProducts = getPro
     const views = buildProductViews(products, { pageUrl });
     const candidate = views.length === 0
       ? createEmptyCandidate()
-      : createProductCandidate(await preloadProductViews(views, loadImage));
+      : createProductCarousel(await preloadProductViews(views, loadImage));
     root.replaceWith(candidate);
+    
+    if (views.length > 0 && typeof initCarouselFn === 'function') {
+      initCarouselFn(candidate.querySelector('.carousel'));
+    }
     return true;
   } catch {
     return false;

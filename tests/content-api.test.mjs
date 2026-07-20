@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import * as api from '../assets/js/core/content-api.mjs';
 import { createMockContentAdapter } from '../assets/js/data/mock-content-adapter.mjs';
 
-const image = (position) => ({
+const image = (position = 1) => ({
   id: `image-${position}`,
   storage_path: `assets/images/product-${position}.webp`,
   alt_text: `Gambar produk posisi ${position}`,
@@ -13,11 +13,10 @@ const image = (position) => ({
 
 const product = (overrides = {}) => ({
   id: 'product-1',
-  reference_code: 'PRODUCT-001',
   status: 'published',
   sort_order: 10,
   created_at: '2026-01-01T00:00:00.000Z',
-  images: [image(1)],
+  image: image(1),
   ...overrides
 });
 
@@ -58,11 +57,14 @@ test('hero is normalized without raw fields', async () => {
   });
 });
 
-test('fixture returns four ordered active promotions and safe empty products', async () => {
+test('fixture returns four ordered active promotions and valid active products', async () => {
   const promotions = await api.getPromotions({ now: '2026-07-19T00:00:00.000Z' });
   assert.deepEqual(promotions.map(({ id }) => id), ['promo-1', 'promo-2', 'promo-3', 'promo-4']);
   assert.ok(promotions.every((item) => Object.keys(item).sort().join() === 'alt,id,src'));
-  assert.deepEqual(await api.getProducts(), []);
+  
+  const products = await api.getProducts();
+  assert.deepEqual(products.map(({ id }) => id), ['product-valid']);
+  assert.ok(products.every((item) => Object.keys(item).sort().join() === 'id,image'));
 });
 
 test('promotion schedule uses inclusive start and exclusive end', async () => {
@@ -91,22 +93,20 @@ test('status filtering and deterministic row ordering are enforced', async () =>
   assert.deepEqual((await adapter.getPromotions()).map(({ id }) => id), ['older', 'a', 'b', 'z']);
 });
 
-test('products accept one to five valid ordered images only', async () => {
+test('products accept exactly one valid image only', async () => {
   const adapter = createMockContentAdapter(content({
     products: [
       product({ id: 'one' }),
-      product({ id: 'five', sort_order: 20, images: [image(5), image(3), image(1), image(4), image(2)] }),
-      product({ id: 'zero', sort_order: 30, images: [] }),
-      product({ id: 'six', sort_order: 40, images: Array.from({ length: 6 }, (_, index) => image(index + 1)) }),
+      product({ id: 'no-image', image: null }),
       product({ id: 'draft', status: 'draft' }),
-      product({ id: 'bad-path', images: [{ ...image(1), storage_path: '../secret.webp' }] }),
-      product({ id: 'bad-alt', images: [{ ...image(1), alt_text: '' }] })
+      product({ id: 'bad-path', image: { ...image(1), storage_path: '../secret.webp' } }),
+      product({ id: 'bad-alt', image: { ...image(1), alt_text: '' } })
     ]
   }));
   const products = await adapter.getProducts();
-  assert.deepEqual(products.map(({ id }) => id), ['one', 'five']);
-  assert.deepEqual(products[1].images.map(({ position }) => position), [1, 2, 3, 4, 5]);
-  assert.deepEqual(Object.keys(products[0]).sort(), ['id', 'images', 'referenceCode']);
+  assert.deepEqual(products.map(({ id }) => id), ['one']);
+  assert.deepEqual(products[0].image.src, 'assets/images/product-1.webp');
+  assert.deepEqual(Object.keys(products[0]).sort(), ['id', 'image']);
 });
 
 test('product limit is clamped and validated', async () => {

@@ -80,48 +80,41 @@ export const mockContent = {
   products: [
     {
       id: 'product-draft',
-      reference_code: 'DRAFT-001',
       status: 'draft',
       sort_order: 10,
       created_at: '2026-01-01T00:00:00.000Z',
-      images: [{ id: 'draft-image-1', storage_path: 'assets/images/brand/logo.webp', alt_text: 'Produk draft', sort_order: 1 }]
+      image: { storage_path: 'assets/images/brand/logo.webp', alt_text: 'Produk draft' }
     },
     {
       id: 'product-archived',
-      reference_code: 'ARCHIVED-001',
       status: 'archived',
       sort_order: 20,
       created_at: '2026-01-02T00:00:00.000Z',
-      images: [{ id: 'archived-image-1', storage_path: 'assets/images/brand/logo.webp', alt_text: 'Produk archived', sort_order: 1 }]
+      image: { storage_path: 'assets/images/brand/logo.webp', alt_text: 'Produk archived' }
     },
     {
-      id: 'product-no-images',
-      reference_code: 'EMPTY-001',
+      id: 'product-no-image',
       status: 'published',
       sort_order: 30,
       created_at: '2026-01-03T00:00:00.000Z',
-      images: []
+      image: null
     },
     {
-      id: 'product-six-images',
-      reference_code: 'SIX-001',
+      id: 'product-valid',
       status: 'published',
       sort_order: 40,
       created_at: '2026-01-04T00:00:00.000Z',
-      images: Array.from({ length: 6 }, (_, index) => ({
-        id: `six-image-${index + 1}`,
+      image: {
         storage_path: 'assets/images/brand/logo.webp',
-        alt_text: `Gambar produk ${index + 1}`,
-        sort_order: index + 1
-      }))
+        alt_text: 'Gambar produk valid'
+      }
     },
     {
       id: 'product-invalid-image',
-      reference_code: 'INVALID-001',
       status: 'published',
       sort_order: 50,
       created_at: '2026-01-05T00:00:00.000Z',
-      images: [{ id: 'invalid-image-1', storage_path: '/assets/images/brand/logo.webp', alt_text: '', sort_order: 1 }]
+      image: { storage_path: '/assets/images/brand/logo.webp', alt_text: '' }
     }
   ]
 };

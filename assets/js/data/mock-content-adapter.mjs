@@ -88,27 +88,14 @@ function normalizePromotion(row, now) {
 }
 
 function normalizeProduct(row) {
-  if (!validBaseRow(row) || row.status !== 'published' || typeof row.reference_code !== 'string' || !Array.isArray(row.images)) return null;
-  if (row.images.length < 1 || row.images.length > 5) return null;
+  if (!validBaseRow(row) || row.status !== 'published' || !isRecord(row.image)) return null;
 
-  const validImages = row.images.every((image) => isRecord(image)
-    && typeof image.id === 'string'
-    && isSafePath(image.storage_path)
-    && isValidText(image.alt_text)
-    && Number.isInteger(image.sort_order)
-    && image.sort_order >= 1
-    && image.sort_order <= 5);
-  if (!validImages) return null;
-
-  const positions = new Set(row.images.map((image) => image.sort_order));
-  if (positions.size !== row.images.length) return null;
+  const image = row.image;
+  if (!isSafePath(image.storage_path) || !isValidText(image.alt_text)) return null;
 
   return {
     id: row.id,
-    referenceCode: row.reference_code,
-    images: [...row.images]
-      .sort((left, right) => left.sort_order - right.sort_order || left.id.localeCompare(right.id))
-      .map((image) => ({ src: image.storage_path, alt: image.alt_text, position: image.sort_order }))
+    image: { src: image.storage_path, alt: image.alt_text }
   };
 }
 
