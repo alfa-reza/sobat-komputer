@@ -1,3 +1,4 @@
 .opencode/
 AGENTS.md
 node_modules/
+.agents/

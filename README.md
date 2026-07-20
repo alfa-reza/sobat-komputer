@@ -109,6 +109,12 @@ Provides client side optimizations. All scripts degrade gracefully in JS-disable
 
 ## 🛠️ Local Development & Tools Execution
 
+### 🚀 Required Tooling
+The project requires Node LTS (verified with `v24.18.0`) to run tests and verification scripts. Ensure your dependencies are installed first:
+```bash
+npm install
+```
+
 ### 🚀 Running the site locally
 Start a simple Python local server inside the repository root directory:
 ```bash
@@ -121,7 +127,7 @@ Open `http://localhost:8000` in your web browser.
 #### 1. Native Unit Tests Suite
 Runs all 38 unit tests covering navigation, product rules, carousel, WhatsApp URL sanitization, and content normalization:
 ```bash
-node --test tests/*.test.mjs
+npm test
 ```
 
 #### 2. Playwright UI/UX Audit & Responsiveness Check
