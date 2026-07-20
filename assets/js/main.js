@@ -20,6 +20,15 @@ if (menuBtn && navList) {
     }
   });
 
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (navList.classList.contains('show') && !menuBtn.contains(e.target) && !navList.contains(e.target)) {
+      menuBtn.classList.remove('open');
+      navList.classList.remove('show');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
   // Close menu with Escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && navList.classList.contains('show')) {

@@ -119,11 +119,7 @@ p {
   padding: 4rem 0;
 }
 
-.section:nth-child(odd) {
-  background: var(--bg);
-}
-
-.section:nth-child(even) {
+.section-alt {
   background: var(--surface);
 }
 
@@ -1173,7 +1169,7 @@ p {
 /* Floating WA button */
 .floating-wa {
   position: fixed;
-  bottom: 24px;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   right: 24px;
   z-index: 90;
   width: 56px;
