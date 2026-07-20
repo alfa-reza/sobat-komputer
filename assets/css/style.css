@@ -1576,3 +1576,58 @@ p {
   font-weight: 600;
   color: var(--accent);
 }
+
+/* ==========================================
+   Alternating Service List
+   ========================================== */
+.alternating-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+
+.alternating-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.alternating-image {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.alternating-content {
+  flex: 1;
+}
+
+.alternating-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.alternating-content p {
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .alternating-item {
+    flex-direction: row;
+    gap: 3rem;
+  }
+  
+  .alternating-item:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+  
+  .alternating-image {
+    max-width: 400px;
+  }
+}
