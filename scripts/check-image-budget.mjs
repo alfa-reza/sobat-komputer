@@ -17,7 +17,6 @@ function checkFile(filePath, profileKey) {
   }
 }
 
-// Add a fast dynamic check if needed, or static list
 const mappings = [
   { file: 'brand/logo.webp', profile: 'logo' },
   { file: 'brand/favicon.png', profile: 'favicon' },
@@ -29,8 +28,14 @@ const mappings = [
   { file: 'promotions/poster-4-set-pc.webp', profile: 'promotion' }
 ];
 
+for (let i = 1; i <= 15; i++) {
+  mappings.push({ file: `produk_laptop/laptop_${i}.webp`, profile: 'placeholder' });
+  mappings.push({ file: `produk_aksesori/aksesori_${i}.webp`, profile: 'placeholder' });
+}
+
 mappings.forEach(m => checkFile(path.join(imagesDir, m.file), m.profile));
 
 if (hasError) {
   process.exit(1);
 }
+

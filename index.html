@@ -171,32 +171,30 @@
     <section id="produk" class="section section-alt" aria-labelledby="home-products-title">
       <div class="wrap">
         <h2 class="section-title" id="home-products-title">Produk Pilihan</h2>
-        <p class="section-sub">Lihat beberapa produk yang tersedia. Untuk informasi stok dan spesifikasi terbaru, tanyakan langsung melalui WhatsApp.</p>
-        <div class="product-grid" data-product-teaser>
+        <p class="section-sub">Lihat pilihan produk laptop dan aksesori komputer yang tersedia. Tanya ketersediaan melalui WhatsApp atau lihat katalog resmi.</p>
+        <div class="product-grid">
           <article class="product-card">
-            <div class="product-images">
-              <img src="assets/images/brand/logo.webp" alt="Laptop Bekas Bergaransi" loading="lazy">
+            <div class="product-photo-wrapper">
+              <img src="assets/images/produk_laptop/laptop_1.webp" alt="Produk Laptop New Sobat Komputer" loading="lazy" class="product-photo">
             </div>
-            <h3>Laptop Bekas Bergaransi</h3>
-            <p>Tersedia berbagai pilihan laptop bekas berkualitas untuk kebutuhan sekolah dan kerja.</p>
+            <h3>Produk Laptop</h3>
+            <p>Pilihan laptop berkualitas dan unit siap pakai untuk kebutuhan sekolah, kerja, atau harian.</p>
+            <a class="btn btn-primary" href="produk.html#produk-laptop">Lihat Produk Laptop</a>
           </article>
           <article class="product-card">
-            <div class="product-images">
-              <img src="assets/images/brand/logo.webp" alt="PC Rakitan Baru" loading="lazy">
+            <div class="product-photo-wrapper">
+              <img src="assets/images/produk_aksesori/aksesori_1.webp" alt="Aksesori Komputer New Sobat Komputer" loading="lazy" class="product-photo">
             </div>
-            <h3>PC Rakitan Baru</h3>
-            <p>Rakitan PC custom sesuai budget untuk office, desain, maupun gaming ringan.</p>
-          </article>
-          <article class="product-card">
-            <div class="product-images">
-              <img src="assets/images/brand/logo.webp" alt="Aksesoris Komputer" loading="lazy">
-            </div>
-            <h3>Aksesoris Komputer</h3>
-            <p>Mouse, keyboard, flashdisk, tinta printer, dan aksesoris lainnya.</p>
+            <h3>Aksesori Komputer</h3>
+            <p>Menyediakan berbagai aksesori komputer seperti mouse, keyboard, flashdisk, dan kelengkapan lainnya.</p>
+            <a class="btn btn-primary" href="produk.html#produk-aksesori">Lihat Aksesori</a>
           </article>
         </div>
-        <p class="product-teaser-action">
-          <a class="btn btn-primary" href="produk.html">Lihat Semua Produk</a>
+        <p class="product-teaser-action mt-2">
+          <a class="btn btn-catalog" href="https://wa.me/c/6288980042670" target="_blank" rel="noopener noreferrer">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Buka Katalog WhatsApp
+          </a>
         </p>
       </div>
     </section>
@@ -306,10 +304,8 @@
 
   <script type="module">
     import { initHero } from './assets/js/public/hero.mjs';
-    import { initProducts } from './assets/js/public/products.mjs';
 
     initHero(document.querySelector('[data-hero-picture]'));
-    initProducts(document.querySelector('[data-product-teaser]'), { limit: 3, pageUrl: window.location.href });
   </script>
   </body>
 </html>

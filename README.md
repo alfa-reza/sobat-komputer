@@ -144,7 +144,24 @@ node scripts/optimize-images.mjs
 ```
 The optimized files will be generated in `assets/images/brand`, `assets/images/hero`, and `assets/images/promotions`.
 
-To replace placeholder images with final photos, drop the new high-resolution images in `assets/images/`, update `scripts/optimize-images.mjs` input mappings if the filename differs, and rerun the script. Then, ensure `npm run validate:images` passes.
+#### Product Image Directories & Naming Rules
+Product poster placeholders and images are stored in:
+- `assets/images/produk_laptop/` (`laptop_1.webp` ... `laptop_15.webp`)
+- `assets/images/produk_aksesori/` (`aksesori_1.webp` ... `aksesori_15.webp`)
+
+To generate or update placeholder images, run:
+```bash
+node scripts/generate-product-placeholders.mjs
+```
+
+#### Procedure for Replacing Product Placeholders with Actual Photos
+1. Prepare poster image with 4:5 aspect ratio (e.g. 960 × 1200 pixels).
+2. Convert image to WebP format.
+3. Use the exact same filename (e.g., `laptop_1.webp` or `aksesori_1.webp`).
+4. Replace the file in `assets/images/produk_laptop/` or `assets/images/produk_aksesori/` without modifying HTML structure.
+5. Update the `alt` text in `produk.html` if the poster content changes.
+6. Run image budget validation (`npm run validate:images`).
+7. Inspect and verify the page on both desktop and mobile viewports.
 
 ### 🌐 GitHub Pages Deployment
 Deployment is fully automated. Pushing to `main` triggers the `Quality Gates` workflow (`.github/workflows/quality.yml`). If all tests pass, GitHub Pages automatically deploys the repository to `https://alfa-reza.github.io/sobat-komputer/`. The configuration uses the root directory without any build steps.

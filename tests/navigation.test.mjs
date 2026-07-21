@@ -30,11 +30,12 @@ test('all navigation destinations exist', async () => {
   await Promise.all(expectedLinks.map((path) => access(new URL(`../${path}`, import.meta.url))));
 });
 
-test('homepage teaser keeps a direct catalog link and bounded dynamic request', async () => {
+test('homepage teaser keeps a direct catalog link and category anchors', async () => {
   const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-  assert.match(html, /data-product-teaser/);
-  assert.match(html, /href="produk\.html">Lihat Semua Produk<\/a>/);
-  assert.match(html, /initProducts\([^;]*limit:\s*3/);
+  assert.match(html, /id="produk"/);
+  assert.match(html, /href="produk\.html#produk-laptop"/);
+  assert.match(html, /href="produk\.html#produk-aksesori"/);
+  assert.match(html, /href="https:\/\/wa\.me\/c\/6288980042670"/);
 });
 
 test('404.html uses root-relative paths for GitHub Pages and includes all main destinations', async () => {

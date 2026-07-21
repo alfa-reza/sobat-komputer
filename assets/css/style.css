@@ -576,12 +576,14 @@ p {
   align-items: start;
 }
 
+.product-carousel-container,
 .promo-carousel-container {
   width: 100%;
   max-width: 440px;
   margin: 0 auto;
 }
 
+.product-carousel,
 .promo-carousel {
   position: relative;
   width: 100%;
@@ -641,11 +643,11 @@ p {
   opacity: 0;
 }
 
-.promo-carousel.is-interactive .carousel-viewport .carousel-btn {
+.carousel.is-interactive .carousel-viewport .carousel-btn {
   display: flex;
 }
 
-.promo-carousel.is-interactive:hover .carousel-viewport .carousel-btn {
+.carousel.is-interactive:hover .carousel-viewport .carousel-btn {
   opacity: 1;
 }
 
@@ -666,7 +668,7 @@ p {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.promo-carousel.is-interactive .carousel-footer {
+.carousel.is-interactive .carousel-footer {
   display: flex;
 }
 
@@ -699,6 +701,18 @@ p {
 .carousel-indicators {
   display: flex;
   gap: 8px;
+}
+
+.product-carousel .carousel-indicators {
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 240px;
+}
+
+@media (max-width: 767px) {
+  .product-carousel .carousel-indicators {
+    display: none;
+  }
 }
 
 .indicator-dot {
