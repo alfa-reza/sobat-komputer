@@ -144,6 +144,18 @@ node scripts/optimize-images.mjs
 ```
 The optimized files will be generated in `assets/images/brand`, `assets/images/hero`, and `assets/images/promotions`.
 
+#### Master Image Dimensions & Safe Margins
+- **Master Design Canvas**: 1080 × 1350 px (Aspect ratio: 4:5, Color profile: sRGB)
+- **Website Production Files**:
+  - Produk: 960 × 1200 px WebP (Max 180 KB per file)
+  - Promo: 1080 × 1350 px WebP (Max 250 KB per file)
+- **Safe Margins**:
+  - General margin: minimal 72 px
+  - Important text margin: 90–110 px
+  - Bottom margin (phone/socials): minimal 100 px
+
+> **Note on Canvas Ratios**: Creating a taller canvas (such as 1080 × 1520 px) will **not** prevent image cropping because the website carousel viewports enforce a strict 4:5 aspect ratio. Always design posters on a 1080 × 1350 canvas.
+
 #### Product Image Directories & Naming Rules
 Product poster placeholders and images are stored in:
 - `assets/images/produk_laptop/` (`laptop_1.webp` ... `laptop_15.webp`)
@@ -155,8 +167,8 @@ node scripts/generate-product-placeholders.mjs
 ```
 
 #### Procedure for Replacing Product Placeholders with Actual Photos
-1. Prepare poster image with 4:5 aspect ratio (e.g. 960 × 1200 pixels).
-2. Convert image to WebP format.
+1. Create master poster design at 1080 × 1350 px (4:5 aspect ratio).
+2. Export image to 960 × 1200 px WebP format.
 3. Use the exact same filename (e.g., `laptop_1.webp` or `aksesori_1.webp`).
 4. Replace the file in `assets/images/produk_laptop/` or `assets/images/produk_aksesori/` without modifying HTML structure.
 5. Update the `alt` text in `produk.html` if the poster content changes.

@@ -44,10 +44,25 @@ test('404.html uses root-relative paths for GitHub Pages and includes all main d
   // Extract all hrefs
   const allHrefs = [...html.matchAll(/href="([^"]+)"/g)].map(m => m[1]);
   
-  // The 404 must use root-relative paths or full URLs (never just 'index.html' which breaks on nested paths without JS)
-  // But wait, if we use JS to inject <base>, then relative paths 'index.html' ARE used!
-  // Let's verify that the destinations exist.
   for (const expected of expectedLinks) {
     assert.ok(allHrefs.includes(expected) || allHrefs.includes('/sobat-komputer/' + expected) || allHrefs.includes('/' + expected), `Missing link to ${expected}`);
   }
+});
+
+test('layanan.html enforces updated copywriting and combined Servis Laptop & PC', async () => {
+  const html = await readFile(new URL('../layanan.html', import.meta.url), 'utf8');
+  assert.match(html, /Servis Laptop &amp; PC/);
+  assert.match(html, /Servis Printer/);
+  assert.match(html, /Internet Fiber Rumah \(iPrime\)/);
+  assert.doesNotMatch(html, /Pendaftaran iPrime Fiber/);
+  assert.doesNotMatch(html, /Melayani pendaftaran/);
+});
+
+test('kontak.html visual labels are concise without bracketed descriptions', async () => {
+  const html = await readFile(new URL('../kontak.html', import.meta.url), 'utf8');
+  assert.match(html, /<span class="wa-number">Owner<\/span>/);
+  assert.match(html, /<span class="wa-number">Admin 1<\/span>/);
+  assert.match(html, /<span class="wa-number">Admin 2<\/span>/);
+  assert.doesNotMatch(html, /Owner \(Layanan &amp; Umum\)/);
+  assert.doesNotMatch(html, /Admin 2 \(Produk &amp; Promo\)/);
 });

@@ -37,8 +37,10 @@ export function initCarousel(root) {
   let focusPaused = false;
   let touchStartX = 0;
 
+  const autoplayEnabled = root.dataset.carouselAutoplay !== 'false';
+
   function canAutoplay() {
-    return rules.isInteractive && !userPaused && !pointerPaused && !focusPaused && !document.hidden && !motionQuery.matches;
+    return autoplayEnabled && rules.isInteractive && !userPaused && !pointerPaused && !focusPaused && !document.hidden && !motionQuery.matches;
   }
 
   function stopAutoplay() {
