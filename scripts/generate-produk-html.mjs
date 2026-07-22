@@ -184,11 +184,11 @@ ${aksesoriSlides}
     <!-- CTA Umum -->
     <section class="section section-alt">
       <div class="wrap">
-        <div class="cta-box">
+        <div class="cta-box product-final-cta-card">
           <h2>Butuh Informasi Produk?</h2>
           <p>Tanyakan stok, kondisi, dan informasi produk melalui WhatsApp atau buka katalog resmi kami.</p>
-          <div class="promo-action-buttons">
-            <a class="btn btn-wa" href="https://wa.me/6288980042670?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia." target="_blank" rel="noopener noreferrer">
+          <div class="product-final-cta-actions">
+            <a class="btn btn-wa product-final-cta-button" href="https://wa.me/6288980042670?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia." target="_blank" rel="noopener noreferrer">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
               Tanya melalui WhatsApp
             </a>

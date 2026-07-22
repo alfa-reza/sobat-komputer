@@ -53,6 +53,15 @@ const mappings = [
   { file: "promotions/poster-2-pemasangan-cctv.webp", profile: "promotion" },
   { file: "promotions/poster-3-jual-laptop.webp", profile: "promotion" },
   { file: "promotions/poster-4-set-pc.webp", profile: "promotion" },
+  { file: "layanan/placeholder-servis-laptop-pc.webp", profile: "service" },
+  { file: "layanan/placeholder-servis-printer.webp", profile: "service" },
+  { file: "layanan/placeholder-jual-beli-laptop-pc.webp", profile: "service" },
+  { file: "layanan/placeholder-aksesori-komputer.webp", profile: "service" },
+  { file: "layanan/placeholder-pemasangan-cctv.webp", profile: "service" },
+  {
+    file: "layanan/placeholder-internet-fiber-rumah-iprime.webp",
+    profile: "service",
+  },
 ];
 
 for (let i = 1; i <= 15; i++) {

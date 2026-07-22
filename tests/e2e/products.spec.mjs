@@ -106,4 +106,39 @@ test.describe("Produk Carousels", () => {
 
     await context.close();
   });
+
+  test("verifies bottom CTA button horizontal center alignment within 2px across viewports", async ({
+    page,
+  }) => {
+    const viewports = [
+      { width: 360, height: 640 },
+      { width: 390, height: 844 },
+      { width: 412, height: 915 },
+      { width: 768, height: 1024 },
+      { width: 1440, height: 900 },
+    ];
+
+    for (const vp of viewports) {
+      await page.setViewportSize(vp);
+      await page.goto("/produk.html");
+
+      const ctaCard = page.locator(".product-final-cta-card");
+      const ctaButton = page.locator(".product-final-cta-button");
+
+      await expect(ctaCard).toBeVisible();
+      await expect(ctaButton).toBeVisible();
+
+      const cardBox = await ctaCard.boundingBox();
+      const buttonBox = await ctaButton.boundingBox();
+
+      expect(cardBox).not.toBeNull();
+      expect(buttonBox).not.toBeNull();
+
+      const cardCenter = cardBox.x + cardBox.width / 2;
+      const buttonCenter = buttonBox.x + buttonBox.width / 2;
+
+      const offset = Math.abs(cardCenter - buttonCenter);
+      expect(offset).toBeLessThanOrEqual(2);
+    }
+  });
 });

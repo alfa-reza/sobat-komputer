@@ -79,16 +79,58 @@ test("404.html uses root-relative paths for GitHub Pages and includes all main d
   }
 });
 
-test("layanan.html enforces updated copywriting and combined Servis Laptop & PC", async () => {
+test("layanan.html enforces updated copywriting, Layanan Servis H2, and service placeholders", async () => {
   const html = await readFile(
     new URL("../layanan.html", import.meta.url),
     "utf8",
   );
+  assert.match(
+    html,
+    /<h2 class="section-title text-left">Layanan Servis<\/h2>/,
+  );
   assert.match(html, /Servis Laptop &amp; PC/);
   assert.match(html, /Servis Printer/);
   assert.match(html, /Internet Fiber Rumah \(iPrime\)/);
-  assert.doesNotMatch(html, /Pendaftaran iPrime Fiber/);
-  assert.doesNotMatch(html, /Melayani pendaftaran/);
+  assert.match(html, /id="proses-servis"/);
+  assert.match(
+    html,
+    /assets\/images\/layanan\/placeholder-servis-laptop-pc\.webp/,
+  );
+  assert.match(
+    html,
+    /assets\/images\/layanan\/placeholder-servis-printer\.webp/,
+  );
+  assert.match(
+    html,
+    /assets\/images\/layanan\/placeholder-jual-beli-laptop-pc\.webp/,
+  );
+  assert.match(
+    html,
+    /assets\/images\/layanan\/placeholder-aksesori-komputer\.webp/,
+  );
+  assert.match(
+    html,
+    /assets\/images\/layanan\/placeholder-pemasangan-cctv\.webp/,
+  );
+  assert.match(
+    html,
+    /assets\/images\/layanan\/placeholder-internet-fiber-rumah-iprime\.webp/,
+  );
+  assert.doesNotMatch(
+    html,
+    /class="alternating-image"[^>]*src="assets\/images\/brand\/logo\.webp"/,
+  );
+});
+
+test("index.html features Toko Komputer hero with product and service CTAs", async () => {
+  const html = await readFile(
+    new URL("../index.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(html, /TOKO KOMPUTER DI KEJOBONG/);
+  assert.match(html, /Produk Komputer dan Layanan Teknis dalam Satu Tempat/);
+  assert.match(html, /href="produk\.html">Lihat Produk<\/a>/);
+  assert.match(html, /href="layanan\.html">Lihat Layanan<\/a>/);
 });
 
 test("kontak.html visual labels are concise without bracketed descriptions", async () => {

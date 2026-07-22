@@ -173,6 +173,39 @@ The optimized files will be generated in `assets/images/brand`, `assets/images/h
 
 > **Note on Canvas Ratios**: Creating a taller canvas (such as 1080 × 1520 px) will **not** prevent image cropping because the website carousel viewports enforce a strict 4:5 aspect ratio. Always design posters on a 1080 × 1350 canvas.
 
+#### Service Placeholder Image Specifications & Directory
+
+Service category illustrations are stored in `assets/images/layanan/`:
+
+- `placeholder-servis-laptop-pc.webp`
+- `placeholder-servis-printer.webp`
+- `placeholder-jual-beli-laptop-pc.webp`
+- `placeholder-aksesori-komputer.webp`
+- `placeholder-pemasangan-cctv.webp`
+- `placeholder-internet-fiber-rumah-iprime.webp`
+
+To regenerate placeholder illustrations using vector SVGs:
+
+```bash
+node scripts/generate-service-placeholders.mjs
+```
+
+**Service Image Specifications**:
+
+- **Master Design Canvas**: 1200 × 1200 px (Aspect ratio: 1:1, Color profile: sRGB)
+- **Website Production Files**: 800 × 800 px WebP (Max 120 KB per file)
+- **Safe Margins**: Minimal 70 px around main illustration subject
+
+**Procedure for Replacing Service Placeholders**:
+
+1. Prepare 1:1 aspect ratio design canvas (1200 × 1200 px).
+2. Ensure the main subject is centered within safe margins (>= 70 px).
+3. Export to 800 × 800 px WebP format.
+4. Keep the exact file name (e.g. `placeholder-servis-laptop-pc.webp`).
+5. Update `alt` text in `layanan.html` if the image content changes.
+6. Run image budget validation (`npm run validate:images`).
+7. Inspect and verify both mobile and desktop viewports.
+
 #### Product Image Directories & Naming Rules
 
 Product poster placeholders and images are stored in:
