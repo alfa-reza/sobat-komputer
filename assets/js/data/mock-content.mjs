@@ -1,120 +1,128 @@
 export const mockContent = {
   hero: {
-    id: 'hero-primary',
-    desktop_path: 'assets/images/hero/new-sobat-komputer-hero-desktop-1536x864.webp',
-    mobile_path: 'assets/images/hero/new-sobat-komputer-hero-mobile-864x1080.webp',
-    alt_text: 'Foto depan toko New Sobat Komputer di Kejobong'
+    id: "hero-primary",
+    desktop_path:
+      "assets/images/hero/new-sobat-komputer-hero-desktop-1536x864.webp",
+    mobile_path:
+      "assets/images/hero/new-sobat-komputer-hero-mobile-864x1080.webp",
+    alt_text: "Foto depan toko New Sobat Komputer di Kejobong",
   },
   promotions: [
     {
-      id: 'promo-1',
-      storage_path: 'assets/images/promotions/poster-1-kredit-laptop.webp',
-      alt_text: 'Poster kredit laptop New Sobat Komputer',
-      status: 'published',
+      id: "promo-1",
+      storage_path: "assets/images/promotions/poster-1-kredit-laptop.webp",
+      alt_text: "Poster kredit laptop New Sobat Komputer",
+      status: "published",
       starts_at: null,
       ends_at: null,
       sort_order: 10,
-      created_at: '2026-01-01T00:00:00.000Z'
+      created_at: "2026-01-01T00:00:00.000Z",
     },
     {
-      id: 'promo-2',
-      storage_path: 'assets/images/promotions/poster-2-pemasangan-cctv.webp',
-      alt_text: 'Poster pemasangan CCTV New Sobat Komputer',
-      status: 'published',
+      id: "promo-2",
+      storage_path: "assets/images/promotions/poster-2-pemasangan-cctv.webp",
+      alt_text: "Poster pemasangan CCTV New Sobat Komputer",
+      status: "published",
       starts_at: null,
       ends_at: null,
       sort_order: 20,
-      created_at: '2026-01-02T00:00:00.000Z'
+      created_at: "2026-01-02T00:00:00.000Z",
     },
     {
-      id: 'promo-3',
-      storage_path: 'assets/images/promotions/poster-3-jual-laptop.webp',
-      alt_text: 'Poster penjualan laptop baru dan second New Sobat Komputer',
-      status: 'published',
+      id: "promo-3",
+      storage_path: "assets/images/promotions/poster-3-jual-laptop.webp",
+      alt_text: "Poster penjualan laptop baru dan second New Sobat Komputer",
+      status: "published",
       starts_at: null,
       ends_at: null,
       sort_order: 30,
-      created_at: '2026-01-03T00:00:00.000Z'
+      created_at: "2026-01-03T00:00:00.000Z",
     },
     {
-      id: 'promo-4',
-      storage_path: 'assets/images/promotions/poster-4-set-pc.webp',
-      alt_text: 'Poster paket PC komputer lengkap New Sobat Komputer',
-      status: 'published',
+      id: "promo-4",
+      storage_path: "assets/images/promotions/poster-4-set-pc.webp",
+      alt_text: "Poster paket PC komputer lengkap New Sobat Komputer",
+      status: "published",
       starts_at: null,
       ends_at: null,
       sort_order: 40,
-      created_at: '2026-01-04T00:00:00.000Z'
+      created_at: "2026-01-04T00:00:00.000Z",
     },
     {
-      id: 'promo-draft',
-      storage_path: 'assets/images/promotions/poster-1-kredit-laptop.webp',
-      alt_text: 'Poster promo draft New Sobat Komputer',
-      status: 'draft',
+      id: "promo-draft",
+      storage_path: "assets/images/promotions/poster-1-kredit-laptop.webp",
+      alt_text: "Poster promo draft New Sobat Komputer",
+      status: "draft",
       starts_at: null,
       ends_at: null,
       sort_order: 50,
-      created_at: '2026-01-05T00:00:00.000Z'
+      created_at: "2026-01-05T00:00:00.000Z",
     },
     {
-      id: 'promo-future',
-      storage_path: 'assets/images/promotions/poster-2-pemasangan-cctv.webp',
-      alt_text: 'Poster promo mendatang New Sobat Komputer',
-      status: 'published',
-      starts_at: '2030-01-01T00:00:00.000Z',
+      id: "promo-future",
+      storage_path: "assets/images/promotions/poster-2-pemasangan-cctv.webp",
+      alt_text: "Poster promo mendatang New Sobat Komputer",
+      status: "published",
+      starts_at: "2030-01-01T00:00:00.000Z",
       ends_at: null,
       sort_order: 60,
-      created_at: '2026-01-06T00:00:00.000Z'
+      created_at: "2026-01-06T00:00:00.000Z",
     },
     {
-      id: 'promo-expired',
-      storage_path: 'assets/images/promotions/poster-3-jual-laptop.webp',
-      alt_text: 'Poster promo berakhir New Sobat Komputer',
-      status: 'published',
-      starts_at: '2025-01-01T00:00:00.000Z',
-      ends_at: '2025-12-31T00:00:00.000Z',
+      id: "promo-expired",
+      storage_path: "assets/images/promotions/poster-3-jual-laptop.webp",
+      alt_text: "Poster promo berakhir New Sobat Komputer",
+      status: "published",
+      starts_at: "2025-01-01T00:00:00.000Z",
+      ends_at: "2025-12-31T00:00:00.000Z",
       sort_order: 70,
-      created_at: '2026-01-07T00:00:00.000Z'
-    }
+      created_at: "2026-01-07T00:00:00.000Z",
+    },
   ],
   products: [
     {
-      id: 'product-draft',
-      status: 'draft',
+      id: "product-draft",
+      status: "draft",
       sort_order: 10,
-      created_at: '2026-01-01T00:00:00.000Z',
-      image: { storage_path: 'assets/images/brand/logo.webp', alt_text: 'Produk draft' }
-    },
-    {
-      id: 'product-archived',
-      status: 'archived',
-      sort_order: 20,
-      created_at: '2026-01-02T00:00:00.000Z',
-      image: { storage_path: 'assets/images/brand/logo.webp', alt_text: 'Produk archived' }
-    },
-    {
-      id: 'product-no-image',
-      status: 'published',
-      sort_order: 30,
-      created_at: '2026-01-03T00:00:00.000Z',
-      image: null
-    },
-    {
-      id: 'product-valid',
-      status: 'published',
-      sort_order: 40,
-      created_at: '2026-01-04T00:00:00.000Z',
+      created_at: "2026-01-01T00:00:00.000Z",
       image: {
-        storage_path: 'assets/images/brand/logo.webp',
-        alt_text: 'Gambar produk valid'
-      }
+        storage_path: "assets/images/brand/logo.webp",
+        alt_text: "Produk draft",
+      },
     },
     {
-      id: 'product-invalid-image',
-      status: 'published',
+      id: "product-archived",
+      status: "archived",
+      sort_order: 20,
+      created_at: "2026-01-02T00:00:00.000Z",
+      image: {
+        storage_path: "assets/images/brand/logo.webp",
+        alt_text: "Produk archived",
+      },
+    },
+    {
+      id: "product-no-image",
+      status: "published",
+      sort_order: 30,
+      created_at: "2026-01-03T00:00:00.000Z",
+      image: null,
+    },
+    {
+      id: "product-valid",
+      status: "published",
+      sort_order: 40,
+      created_at: "2026-01-04T00:00:00.000Z",
+      image: {
+        storage_path: "assets/images/brand/logo.webp",
+        alt_text: "Gambar produk valid",
+      },
+    },
+    {
+      id: "product-invalid-image",
+      status: "published",
       sort_order: 50,
-      created_at: '2026-01-05T00:00:00.000Z',
-      image: { storage_path: '/assets/images/brand/logo.webp', alt_text: '' }
-    }
-  ]
+      created_at: "2026-01-05T00:00:00.000Z",
+      image: { storage_path: "/assets/images/brand/logo.webp", alt_text: "" },
+    },
+  ],
 };

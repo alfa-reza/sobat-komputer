@@ -1,37 +1,39 @@
-import { CONTACTS } from './contacts.mjs';
+import { CONTACTS } from "./contacts.mjs";
 
 const INTENTS = Object.freeze({
   GENERAL: Object.freeze({
     contact: CONTACTS.OWNER,
-    template: 'Halo New Sobat Komputer, saya mendapatkan informasi dari website.'
+    template:
+      "Halo New Sobat Komputer, saya mendapatkan informasi dari website.",
   }),
   SERVICE: Object.freeze({
     contact: CONTACTS.OWNER,
-    template: 'Halo New Sobat Komputer, saya ingin menanyakan layanan servis.'
+    template: "Halo New Sobat Komputer, saya ingin menanyakan layanan servis.",
   }),
   PRODUCT: Object.freeze({
     contact: CONTACTS.ADMIN_2,
-    template: 'Halo New Sobat Komputer, saya ingin menanyakan produk yang tersedia.'
+    template:
+      "Halo New Sobat Komputer, saya ingin menanyakan produk yang tersedia.",
   }),
   PROMO: Object.freeze({
     contact: CONTACTS.ADMIN_2,
-    template: 'Halo New Sobat Komputer, saya mau tanya detail promo terbaru.'
+    template: "Halo New Sobat Komputer, saya mau tanya detail promo terbaru.",
   }),
   LOCATION: Object.freeze({
     contact: CONTACTS.OWNER,
-    template: 'Halo New Sobat Komputer, saya ingin menanyakan lokasi toko.'
-  })
+    template: "Halo New Sobat Komputer, saya ingin menanyakan lokasi toko.",
+  }),
 });
 
 function validationError() {
-  const error = new Error('Invalid WhatsApp request.');
-  error.name = 'WhatsAppUrlError';
-  error.code = 'VALIDATION_ERROR';
+  const error = new Error("Invalid WhatsApp request.");
+  error.name = "WhatsAppUrlError";
+  error.code = "VALIDATION_ERROR";
   return error;
 }
 
 export function buildWhatsAppUrl({ intent } = {}) {
-  if (typeof intent !== 'string') throw validationError();
+  if (typeof intent !== "string") throw validationError();
   const key = intent.toUpperCase();
   if (!INTENTS[key]) throw validationError();
 

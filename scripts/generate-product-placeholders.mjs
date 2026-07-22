@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import sharp from 'sharp';
+import fs from "fs";
+import path from "path";
+import sharp from "sharp";
 
 const laptopSvg = `
 <svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
@@ -211,8 +211,18 @@ async function main() {
     .webp({ quality: 85 })
     .toBuffer();
 
-  const laptopDir = path.join(process.cwd(), 'assets', 'images', 'produk_laptop');
-  const accDir = path.join(process.cwd(), 'assets', 'images', 'produk_aksesori');
+  const laptopDir = path.join(
+    process.cwd(),
+    "assets",
+    "images",
+    "produk_laptop",
+  );
+  const accDir = path.join(
+    process.cwd(),
+    "assets",
+    "images",
+    "produk_aksesori",
+  );
 
   fs.mkdirSync(laptopDir, { recursive: true });
   fs.mkdirSync(accDir, { recursive: true });
@@ -222,10 +232,12 @@ async function main() {
     fs.writeFileSync(path.join(accDir, `aksesori_${i}.webp`), accBuf);
   }
 
-  console.log('Successfully generated 15 laptop and 15 accessory placeholders (960x1200 WebP)');
+  console.log(
+    "Successfully generated 15 laptop and 15 accessory placeholders (960x1200 WebP)",
+  );
 }
 
-main().catch(err => {
+main().catch((err) => {
   console.error(err);
   process.exit(1);
 });

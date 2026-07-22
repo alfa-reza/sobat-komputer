@@ -1,18 +1,23 @@
-import fs from 'fs';
-import path from 'path';
+import fs from "fs";
+import path from "path";
 
 function renderSlides(type, nounLower, labelPrefix, pathPrefix, filePrefix) {
-  let html = '';
+  let html = "";
   for (let i = 1; i <= 15; i++) {
     const isFirst = i === 1;
-    const hiddenAttr = isFirst ? 'aria-hidden="false"' : 'aria-hidden="true" inert';
-    const loadingAttr = isFirst && type === 'laptop' ? 'loading="eager"' : 'loading="lazy"';
-    const waLabel = type === 'laptop'
-      ? 'Buka katalog WhatsApp resmi untuk melihat produk laptop'
-      : 'Buka katalog WhatsApp resmi untuk melihat aksesori komputer';
-    const altText = type === 'laptop'
-      ? `Poster produk laptop ${i} New Sobat Komputer`
-      : `Poster aksesori komputer ${i} New Sobat Komputer`;
+    const hiddenAttr = isFirst
+      ? 'aria-hidden="false"'
+      : 'aria-hidden="true" inert';
+    const loadingAttr =
+      isFirst && type === "laptop" ? 'loading="eager"' : 'loading="lazy"';
+    const waLabel =
+      type === "laptop"
+        ? "Buka katalog WhatsApp resmi untuk melihat produk laptop"
+        : "Buka katalog WhatsApp resmi untuk melihat aksesori komputer";
+    const altText =
+      type === "laptop"
+        ? `Poster produk laptop ${i} New Sobat Komputer`
+        : `Poster aksesori komputer ${i} New Sobat Komputer`;
 
     html += `                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="${labelPrefix} ${i} dari 15" ${hiddenAttr}>
                   <div class="product-photo-wrapper">
@@ -25,8 +30,20 @@ function renderSlides(type, nounLower, labelPrefix, pathPrefix, filePrefix) {
   return html.trimEnd();
 }
 
-const laptopSlides = renderSlides('laptop', 'produk laptop', 'Produk laptop', 'produk_laptop', 'laptop');
-const aksesoriSlides = renderSlides('aksesori', 'aksesori komputer', 'Aksesori komputer', 'produk_aksesori', 'aksesori');
+const laptopSlides = renderSlides(
+  "laptop",
+  "produk laptop",
+  "Produk laptop",
+  "produk_laptop",
+  "laptop",
+);
+const aksesoriSlides = renderSlides(
+  "aksesori",
+  "aksesori komputer",
+  "Aksesori komputer",
+  "produk_aksesori",
+  "aksesori",
+);
 
 const fullHtml = `<!doctype html>
 <html lang="id">
@@ -49,7 +66,7 @@ const fullHtml = `<!doctype html>
   <header class="header">
     <div class="wrap">
       <a href="index.html" class="header-brand" aria-label="Kembali ke beranda">
-        <img src="assets/images/brand/logo.webp" alt="Logo New Sobat Komputer" width="32" height="32">
+        <img src="assets/images/brand/logo.webp" alt="Logo New Sobat Komputer" width="36" height="36">
         New Sobat Komputer
       </a>
       <button type="button" class="menu-btn" id="menuBtn" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="navList">
@@ -223,5 +240,5 @@ ${aksesoriSlides}
 </html>
 `;
 
-fs.writeFileSync(path.join(process.cwd(), 'produk.html'), fullHtml);
-console.log('Successfully generated produk.html');
+fs.writeFileSync(path.join(process.cwd(), "produk.html"), fullHtml);
+console.log("Successfully generated produk.html");

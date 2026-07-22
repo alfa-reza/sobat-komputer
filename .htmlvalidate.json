@@ -6,6 +6,7 @@
     "no-inline-style": "off",
     "require-sri": "off",
     "no-trailing-whitespace": "off",
-    "doctype-style": "off"
+    "doctype-style": "off",
+    "void-style": "off"
   }
 }
