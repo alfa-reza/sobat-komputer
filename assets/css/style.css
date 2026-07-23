@@ -1216,14 +1216,17 @@ p {
 .product-final-cta-actions {
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
+  gap: 12px;
+  margin-top: 1.5rem;
 }
 
 .product-final-cta-button {
-  width: min(100%, 440px);
-  margin-inline: auto;
+  flex: 1 1 auto;
+  min-width: min(100%, 220px);
+  max-width: 360px;
   min-height: 48px;
   display: inline-flex;
   align-items: center;
