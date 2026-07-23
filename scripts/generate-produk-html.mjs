@@ -107,7 +107,7 @@ const fullHtml = `<!doctype html>
     <section id="produk-laptop" class="section section-alt product-category-section">
       <div class="wrap">
         <h2 class="section-title product-category-title">Produk Laptop</h2>
-        
+
         <div class="product-carousel-container">
           <div class="carousel product-carousel" data-carousel="product-laptop" data-product-carousel data-carousel-noun="Produk laptop" data-carousel-autoplay="false" role="group" aria-roledescription="carousel" aria-label="Produk Laptop">
             <div class="carousel-viewport">
@@ -184,13 +184,17 @@ ${aksesoriSlides}
     <!-- CTA Umum -->
     <section class="section section-alt">
       <div class="wrap">
-        <div class="cta-box product-final-cta-card">
-          <h2>Butuh Informasi Produk?</h2>
-          <p>Tanyakan stok, kondisi, dan informasi produk melalui WhatsApp atau buka katalog resmi kami.</p>
+        <div class="cta-box product-final-cta-card" data-reveal>
+          <h2>Masih Ingin Menanyakan Produk?</h2>
+          <p>Tanyakan stok, kondisi, atau informasi produk melalui WhatsApp atau buka katalog resmi kami.</p>
           <div class="product-final-cta-actions">
             <a class="btn btn-wa product-final-cta-button" href="https://wa.me/6288980042670?text=Halo%20New%20Sobat%20Komputer%2C%20saya%20ingin%20menanyakan%20produk%20yang%20tersedia." target="_blank" rel="noopener noreferrer">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
               Tanya melalui WhatsApp
+            </a>
+            <a class="btn btn-catalog product-final-cta-button" href="https://wa.me/c/6288980042670" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              Lihat Katalog WhatsApp
             </a>
           </div>
         </div>
