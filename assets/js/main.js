@@ -59,3 +59,48 @@ if (backTop) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
+// Header scroll state
+const header = document.querySelector(".header");
+if (header) {
+  const scrollThreshold = 32;
+  let ticking = false;
+  const onScroll = () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(() => {
+        header.classList.toggle("is-scrolled", window.scrollY > scrollThreshold);
+        ticking = false;
+      });
+    }
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
+// Reveal on scroll (IntersectionObserver)
+const motionOk =
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (motionOk && "IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-revealed");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 },
+  );
+
+  document.querySelectorAll("[data-reveal]").forEach((el) => {
+    revealObserver.observe(el);
+  });
+} else {
+  // No animation: make everything visible immediately
+  document.querySelectorAll("[data-reveal]").forEach((el) => {
+    el.classList.add("is-revealed");
+  });
+}

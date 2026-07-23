@@ -21,22 +21,22 @@ const jobs = [
   },
   {
     in: "poster-1-kredit-laptop.png",
-    out: "promotions/poster-1-kredit-laptop.webp",
+    out: "promotions/promo-1.webp",
     profile: "promotion",
   },
   {
     in: "poster-2-pemasangan-cctv.png",
-    out: "promotions/poster-2-pemasangan-cctv.webp",
+    out: "promotions/promo-2.webp",
     profile: "promotion",
   },
   {
     in: "poster-3-jual-laptop.png",
-    out: "promotions/poster-3-jual-laptop.webp",
+    out: "promotions/promo-3.webp",
     profile: "promotion",
   },
   {
     in: "poster-4-set-pc.png",
-    out: "promotions/poster-4-set-pc.webp",
+    out: "promotions/promo-4.webp",
     profile: "promotion",
   },
 ];

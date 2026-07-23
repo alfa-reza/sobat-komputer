@@ -173,6 +173,40 @@ The optimized files will be generated in `assets/images/brand`, `assets/images/h
 
 > **Note on Canvas Ratios**: Creating a taller canvas (such as 1080 × 1520 px) will **not** prevent image cropping because the website carousel viewports enforce a strict 4:5 aspect ratio. Always design posters on a 1080 × 1350 canvas.
 
+#### Promo Poster Files & Naming
+
+The promo carousel uses 8 poster files stored in `assets/images/promotions/`:
+
+| File | Theme |
+|------|-------|
+| `promo-1.webp` | Kredit laptop |
+| `promo-2.webp` | Pemasangan CCTV |
+| `promo-3.webp` | Jual laptop baru dan bekas |
+| `promo-4.webp` | Paket PC |
+| `promo-5.webp` | Servis Laptop & PC |
+| `promo-6.webp` | Servis Printer |
+| `promo-7.webp` | Aksesori Komputer |
+| `promo-8.webp` | Internet Fiber Rumah (iPrime) |
+
+**Specifications**:
+
+- **Master Canvas**: 1080 × 1350 px
+- **Format**: WebP
+- **Aspect Ratio**: 4:5
+- **Color Profile**: sRGB
+- **Maximum Size**: 250 KB per file
+
+**Procedure for Replacing a Promo Poster**:
+
+1. Prepare a new poster design at 1080 × 1350 px.
+2. Use safe margins (minimal 72 px, important text 90 px from edges, bottom 100 px).
+3. Export to WebP sRGB format.
+4. Use the exact same filename (e.g. `promo-5.webp`).
+5. Update `alt` text in `promo.html` if the poster content changes.
+6. Run image budget validation (`npm run validate:images`).
+7. Check the carousel on both mobile and desktop viewports.
+8. Do **not** change the poster order without updating HTML, alt text, and tests.
+
 #### Service Placeholder Image Specifications & Directory
 
 Service category illustrations are stored in `assets/images/layanan/`:

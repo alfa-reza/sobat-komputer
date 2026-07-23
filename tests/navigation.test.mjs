@@ -144,3 +144,79 @@ test("kontak.html visual labels are concise without bracketed descriptions", asy
   assert.doesNotMatch(html, /Owner \(Layanan &amp; Umum\)/);
   assert.doesNotMatch(html, /Admin 2 \(Produk &amp; Promo\)/);
 });
+
+test("index.html copywriting uses Garansi Sesuai Nota", async () => {
+  const html = await readFile(
+    new URL("../index.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(html, /Garansi Sesuai Nota/);
+  assert.doesNotMatch(html, /Garansi Terjamin/);
+});
+
+test("index.html promo section uses Promo Terbaru heading", async () => {
+  const html = await readFile(
+    new URL("../index.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(html, /Promo Terbaru/);
+  // Promo section should not have katalog button
+  const promoSection = html.match(
+    /id="promo"[\s\S]*?<\/section>/,
+  )?.[0];
+  assert.ok(promoSection);
+  assert.doesNotMatch(promoSection, /Buka Katalog WhatsApp/);
+});
+
+test("promo.html uses Promo as H1, not Promo dan Katalog", async () => {
+  const html = await readFile(
+    new URL("../promo.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(html, /<h1>Promo<\/h1>/);
+  assert.doesNotMatch(html, /Promo dan Katalog/);
+  assert.doesNotMatch(html, /Promo &amp; Katalog/);
+});
+
+test("promo.html has no katalog button or katalog heading", async () => {
+  const html = await readFile(
+    new URL("../promo.html", import.meta.url),
+    "utf8",
+  );
+  assert.doesNotMatch(html, /Buka Katalog WhatsApp/);
+  assert.match(html, /Informasi Promo/);
+});
+
+test("no old poster filenames referenced in HTML files", async () => {
+  for (const page of ["index.html", "promo.html"]) {
+    const html = await readFile(
+      new URL(`../${page}`, import.meta.url),
+      "utf8",
+    );
+    assert.doesNotMatch(html, /poster-1-kredit-laptop/);
+    assert.doesNotMatch(html, /poster-2-pemasangan-cctv/);
+    assert.doesNotMatch(html, /poster-3-jual-laptop/);
+    assert.doesNotMatch(html, /poster-4-set-pc/);
+  }
+});
+
+test("promo.html has exactly 8 carousel slides", async () => {
+  const html = await readFile(
+    new URL("../promo.html", import.meta.url),
+    "utf8",
+  );
+  const slideMatches = html.match(/class="carousel-slide"/g);
+  assert.equal(slideMatches?.length, 8);
+  assert.match(html, /1 \/ 8/);
+});
+
+test("layanan.html uses updated copywriting for jual beli section", async () => {
+  const html = await readFile(
+    new URL("../layanan.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(html, /Tersedia pilihan laptop, PC, dan aksesori komputer di toko kami/);
+  assert.doesNotMatch(html, /Kami menyediakan unit laptop\/PC berkualitas serta aksesori pendukung lengkap/);
+  assert.match(html, /Kondisi fisik dan fungsi unit dijelaskan sebelum transaksi/);
+  assert.doesNotMatch(html, /Kondisi barang transparan, tanpa ada yang ditutup-tutupi/);
+});

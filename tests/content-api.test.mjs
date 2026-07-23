@@ -64,13 +64,13 @@ test("hero is normalized without raw fields", async () => {
   });
 });
 
-test("fixture returns four ordered active promotions and valid active products", async () => {
+test("fixture returns eight ordered active promotions and valid active products", async () => {
   const promotions = await api.getPromotions({
     now: "2026-07-19T00:00:00.000Z",
   });
   assert.deepEqual(
     promotions.map(({ id }) => id),
-    ["promo-1", "promo-2", "promo-3", "promo-4"],
+    ["promo-1", "promo-2", "promo-3", "promo-4", "promo-5", "promo-6", "promo-7", "promo-8"],
   );
   assert.ok(
     promotions.every(
@@ -208,7 +208,7 @@ test("results are fresh and media paths remain safe and relative", async () => {
   first[0].src = "/mutated";
   first.push({ id: "bad", src: "../bad", alt: "Bad path" });
   const second = await api.getPromotions({ now: "2026-07-19T00:00:00.000Z" });
-  assert.equal(second.length, 4);
+  assert.equal(second.length, 8);
   assert.ok(
     second.every(
       ({ src }) =>

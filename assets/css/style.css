@@ -739,12 +739,18 @@ p {
   opacity: 0;
 }
 
-.carousel.is-interactive .carousel-viewport .carousel-btn {
+.is-interactive .carousel-viewport .carousel-btn {
   display: flex;
 }
 
-.carousel.is-interactive:hover .carousel-viewport .carousel-btn {
+.is-interactive:hover .carousel-viewport .carousel-btn {
   opacity: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .is-interactive .carousel-viewport .carousel-btn {
+    opacity: 0.9;
+  }
 }
 
 .carousel-viewport .carousel-btn.prev {
@@ -770,7 +776,7 @@ p {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.carousel.is-interactive .carousel-footer {
+.is-interactive .carousel-footer {
   display: flex;
 }
 
@@ -1703,6 +1709,12 @@ p {
   .carousel-track {
     transition: none !important;
   }
+
+  .js-ready [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* ==========================================
@@ -1753,6 +1765,7 @@ p {
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .service-list-icon {
@@ -1838,5 +1851,134 @@ p {
 
   .alternating-image {
     max-width: 400px;
+  }
+}
+
+/* ==========================================
+   Enhancements & Fixes
+   ========================================== */
+
+/* Reveal on Scroll */
+.js-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 500ms ease, transform 500ms ease;
+}
+
+.js-ready [data-reveal].is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header Scroll State */
+.header.is-scrolled {
+  box-shadow: 0 4px 20px -2px rgba(46, 37, 32, 0.08);
+  background: rgba(255, 255, 255, 0.97);
+}
+
+/* Section Rhythm */
+.section-cream {
+  background: var(--bg);
+}
+
+/* Touch device carousel controls */
+@media (hover: none), (pointer: coarse) {
+  .carousel.is-interactive .carousel-viewport .carousel-btn {
+    opacity: 0.85;
+  }
+}
+
+/* Carousel Progress Bar */
+.carousel-progress {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.carousel-progress-bar {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+/* Hide promo dots on mobile to avoid overcrowding */
+@media (max-width: 767px) {
+  .promo-carousel .carousel-indicators {
+    display: none;
+  }
+}
+
+/* Card hover microinteractions */
+.js-ready .card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(217, 119, 6, 0.3);
+}
+
+.js-ready .card:hover .card-icon {
+  transform: scale(1.03);
+}
+
+.js-ready .service-list-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(217, 119, 6, 0.25);
+}
+
+.js-ready .card-link:hover {
+  transform: translateX(3px);
+}
+
+.js-ready .btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Section accent separator */
+.section-accent-line {
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 2px;
+  margin: 0 auto 2rem;
+}
+
+.text-left .section-accent-line,
+.section-accent-line.align-left {
+  margin-left: 0;
+}
+
+/* Product page mobile spacing */
+@media (max-width: 767px) {
+  .product-category-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .product-category-section + .product-category-section {
+    padding-top: 1rem;
+  }
+
+  .product-carousel-container {
+    margin-top: 1.25rem;
+  }
+
+  .product-actions {
+    margin-top: 1rem;
+  }
+
+  .product-final-cta-card {
+    padding: 2.5rem 1.25rem;
+  }
+}
+
+/* Promo page desktop layout */
+@media (min-width: 992px) {
+  .promo-page-wrap {
+    grid-template-columns: minmax(0, 520px) 1fr;
+    gap: 3rem;
   }
 }
